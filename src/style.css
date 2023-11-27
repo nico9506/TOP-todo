@@ -1,13 +1,131 @@
 :root {
-    --ct-numix: rgb(217, 34, 34);
+    /* Color theme */
+    --ct-numix: rgb(235, 54, 54);
+    --ct-darker: rgb(23, 20, 20);
+    --ct-dark: rgb(51, 11, 11);
+    --ct-light: rgb(219, 179, 179);
+    --ct-lighter: white;
+
+    /* Elements height */
+    --navbar-h: 5rem;
+    --footer-h: 4rem;
+
+    /* Font size */
+    --logo-fs: 3rem;
+    --navbar-fs: 1.5rem;
+    --header-fs: 2rem;
+    --subheader-fs: 1.7rem;
+    --subheader-sm-fs: 1.4rem;
+    --content-fs: 1rem;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-h1 {
-    color: var(--ct-numix);
+/* --------------------- Nav bar -------------------- */
+nav {
+    width: 100%;
+    height: var(--navbar-h);
+    background-color: var(--ct-light);
+    color: var(--ct-darker);
+    font-size: var(--navbar-fs);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.title-container {
+    width: fit-content;
+    height: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: var(--navbar-fs);
+    margin-right: 1rem;
+}
+
+.app-name {
+    display: none;
+}
+
+.add-btn {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0rem;
+    padding: 0.5rem;
+    font-size: 0;
+    border-radius: 30px;
+    border: 2px solid var(--ct-darker);
+}
+
+.add-btn > img {
+    width: var(--header-fs);
+}
+
+.add-btn:hover {
+    cursor: pointer;
+    background-color: var(--ct-numix);
+}
+
+/* //--------------------------------------------------------------// */
+/* //--------------------------------------------------------------// */
+/* //--------------------------------------------------------------// */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --fs-navbar: 1rem;
+        --fs-logo: 1.4rem;
+        --fs-headers: 1.9rem;
+        --fs-subheader: 1.5rem;
+        --fs-content: 1rem;
+
+        --logo-fs: 1.4rem;
+        --navbar-fs: 1rem;
+        --header-fs: 1.9rem;
+        --subheader-fs: 1.5rem;
+        --subheader-sm-fs: 1.4rem;
+        --content-fs: 1rem;
+    }
+
+    .app-name {
+        display: block;
+    }
+
+    .add-btn {
+        font-size: var(--navbar-fs);
+        gap: 0.5rem;
+    }
+
+    
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --logo-fs: 1.6rem;
+        --navbar-fs: 1.1rem;
+        --header-fs: 2rem;
+        --subheader-fs: 1.6rem;
+        --subheader-sm-fs: 1.5rem;
+        --content-fs: 1rem;
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

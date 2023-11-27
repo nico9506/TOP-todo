@@ -1,6 +1,12 @@
+import generateNavigationBar from './home';
 import './style.css';
 
-const salute = document.createElement("h1");
-salute.textContent = "Hello from index.js";
+(function generateWebPage() {
+    /**
+     * Load the components to create and print the HTML elements
+     */
 
-document.body.appendChild(salute);
+    const body = document.body;
+
+    body.appendChild(generateNavigationBar());
+})();
