@@ -1,3 +1,7 @@
+/**
+ * Creates the HTML elements
+ */
+
 import iconMenu from "./assets/bars-solid.svg";
 import iconPlus from "./assets/circle-plus-solid.svg";
 import githubIcon from "./assets/github.svg";
@@ -17,14 +21,14 @@ export function generateNavigationBar() {
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("title-container");
 
-    const logo = new Image();
-    logo.src = iconMenu;
-    logo.classList.add("logo");
-    titleContainer.appendChild(logo);
+    const menuIcon = new Image();
+    menuIcon.src = iconMenu;
+    menuIcon.id = "menuIcon";
+    menuIcon.classList.add("logo");
+    titleContainer.appendChild(menuIcon);
 
     const appName = document.createElement("h1");
     appName.classList.add("app-name");
-    appName.id = "appName";
     appName.textContent = DEFAULT_TITLE;
     titleContainer.appendChild(appName);
 
@@ -80,6 +84,8 @@ export function generateSidePanel() {
      */
 
     const sidePanel = document.createElement('aside');
+    sidePanel.classList.add('side-panel');
+    sidePanel.id = 'sidePanel';
 
     const text = document.createElement('h1');
     text.textContent = "Sidepanel title";
@@ -95,6 +101,7 @@ export function generateMainPanel() {
      */
 
     const mainPanel = document.createElement('main');
+    mainPanel.classList.add('main-content');
 
     const text = document.createElement('h1');
     text.textContent = "MainPanel title";

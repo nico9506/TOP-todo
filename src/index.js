@@ -1,9 +1,5 @@
-import {
-    generateNavigationBar,
-    generateFooter,
-    generateSidePanel,
-    generateMainPanel,
-} from "./home";
+import * as AppInterface from "./home.js";
+import * as AppFunctionalities from "./functionalities.js";
 import "./style.css";
 
 (function generateWebPage() {
@@ -13,11 +9,15 @@ import "./style.css";
 
     const body = document.body;
 
-    body.appendChild(generateNavigationBar());
+    body.appendChild(AppInterface.generateNavigationBar());
 
-    body.appendChild(generateSidePanel());
+    body.appendChild(AppInterface.generateSidePanel());
 
-    body.appendChild(generateMainPanel());
+    body.appendChild(AppInterface.generateMainPanel());
 
-    body.appendChild(generateFooter());
+    body.appendChild(AppInterface.generateFooter());
+})();
+
+(function addEvListeners() {
+    AppFunctionalities.addEvLToggleMenu();
 })();
