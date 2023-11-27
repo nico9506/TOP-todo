@@ -1,0 +1,29 @@
+{
+  "name": "top-todo",
+  "version": "1.0.0",
+  "description": "This TODO app project takes part of the React pathway of The Odin Project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nico9506/TOP-todo"
+  },
+  "keywords": [
+    "TODO",
+    "Odin",
+    "TOP"
+  ],
+  "author": "Nicolas Lopez",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
