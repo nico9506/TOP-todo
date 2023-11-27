@@ -1,5 +1,10 @@
-import generateNavigationBar from './home';
-import './style.css';
+import {
+    generateNavigationBar,
+    generateFooter,
+    generateSidePanel,
+    generateMainPanel,
+} from "./home";
+import "./style.css";
 
 (function generateWebPage() {
     /**
@@ -9,4 +14,10 @@ import './style.css';
     const body = document.body;
 
     body.appendChild(generateNavigationBar());
+
+    body.appendChild(generateSidePanel());
+
+    body.appendChild(generateMainPanel());
+
+    body.appendChild(generateFooter());
 })();

@@ -7,16 +7,20 @@
     --ct-lighter: white;
 
     /* Elements height */
-    --navbar-h: 5rem;
-    --footer-h: 4rem;
+    --navbar-h: 3.8rem;
+    --side-panel-length: 10rem;
+    --content-h: calc(
+        100vh - var(--navbar-h) - var(--footer-h) - var(--side-panel-length)
+    );
+    --footer-h: 3rem;
 
     /* Font size */
-    --logo-fs: 3rem;
-    --navbar-fs: 1.5rem;
-    --header-fs: 2rem;
-    --subheader-fs: 1.7rem;
-    --subheader-sm-fs: 1.4rem;
-    --content-fs: 1rem;
+    --logo-fs: 1.3rem;
+    --navbar-fs: 1rem;
+    --header-fs: 1.8rem;
+    --subheader-fs: 1.4rem;
+    --subheader-sm-fs: 1.3rem;
+    --content-fs: 0.9rem;
 }
 
 * {
@@ -27,10 +31,31 @@
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+body {
+    display: grid;
+    grid-template:
+        var(--navbar-h) var(--side-panel-length) var(--content-h) var(
+            --footer-h
+        )
+        / 1fr;
+    grid-template-areas:
+        "navbar"
+        "side-panel"
+        "main-content"
+        "footer";
+}
+
+.hidden {
+    grid-template-areas:
+        "navbar"
+        "main-content"
+        "main-content"
+        "footer";
+}
+
 /* --------------------- Nav bar -------------------- */
 nav {
-    width: 100%;
-    height: var(--navbar-h);
+    grid-area: navbar;
     background-color: var(--ct-light);
     color: var(--ct-darker);
     font-size: var(--navbar-fs);
@@ -50,6 +75,10 @@ nav {
 .logo {
     width: var(--navbar-fs);
     margin-right: 1rem;
+}
+
+.logo:hover {
+    cursor: pointer;
 }
 
 .app-name {
@@ -76,23 +105,61 @@ nav {
     background-color: var(--ct-numix);
 }
 
+/* --------------------- Side panel -------------------- */
+.side-panel {
+    grid-area: side-panel;
+}
+
+.side-panel-hidden {
+    display: none;
+}
+
+/* --------------------- main panel -------------------- */
+.main-content {
+    grid-area: main-content;
+}
+
+/* --------------------- Footer -------------------- */
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--ct-light);
+}
+
+footer > .github-contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--ct-darker);
+}
+
+footer > .github-contact-info:hover {
+    color: var(--ct-numix);
+}
+
+footer > .github-contact-info > .footer-logo {
+    width: var(--logo-fs);
+}
+
+footer > .github-contact-info > .github-user {
+    font-size: var(--logo-fs);
+}
+
 /* //--------------------------------------------------------------// */
 /* //--------------------------------------------------------------// */
 /* //--------------------------------------------------------------// */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        --fs-navbar: 1rem;
-        --fs-logo: 1.4rem;
-        --fs-headers: 1.9rem;
-        --fs-subheader: 1.5rem;
-        --fs-content: 1rem;
-
         --logo-fs: 1.4rem;
         --navbar-fs: 1rem;
         --header-fs: 1.9rem;
@@ -109,8 +176,6 @@ nav {
         font-size: var(--navbar-fs);
         gap: 0.5rem;
     }
-
-    
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -121,6 +186,29 @@ nav {
         --subheader-fs: 1.6rem;
         --subheader-sm-fs: 1.5rem;
         --content-fs: 1rem;
+
+        /* Elements height */
+        --side-panel-length: min(20rem, 40%);
+        --content-h: calc(100vh - var(--navbar-h) - var(--footer-h));
+    }
+
+    body {
+        grid-template:
+            var(--navbar-h) var(--content-h) var(--footer-h) / var(
+                --side-panel-length
+            )
+            1fr;
+        grid-template-areas:
+            "navbar navbar"
+            "side-panel main-content"
+            "footer footer";
+    }
+
+    .hidden {
+        grid-template-areas:
+            "navbar navbar"
+            "main-content main-content"
+            "footer footer";
     }
 }
 /* Large devices (laptops/desktops, 992px and up) */
