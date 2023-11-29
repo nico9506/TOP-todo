@@ -1,10 +1,24 @@
 :root {
     /* Color theme */
-    --ct-numix: rgb(235, 54, 54);
-    --ct-darker: rgb(23, 20, 20);
-    --ct-dark: rgb(51, 11, 11);
-    --ct-light: rgb(219, 179, 179);
-    --ct-lighter: white;
+    --ct-darker: #2d2d2d;
+    --ct-dark: #3d3d3d;
+    --ct-grey: #535353;
+    --ct-numix: #d64937;
+    --ct-light: #dcdcdc;
+    --ct-white: #ffffff;
+    /* Color theme (filter) for SVG images */
+    --filter-darker: invert(11%) sepia(0%) saturate(0%) hue-rotate(217deg)
+        brightness(102%) contrast(84%);
+    --filter-dark: invert(15%) sepia(0%) saturate(1327%) hue-rotate(271deg)
+        brightness(101%) contrast(74%);
+    --filter-grey: invert(32%) sepia(0%) saturate(0%) hue-rotate(320deg)
+        brightness(95%) contrast(89%);
+    --filter-numix: invert(34%) sepia(22%) saturate(6773%) hue-rotate(345deg)
+        brightness(92%) contrast(80%);
+    --filter-light: invert(99%) sepia(0%) saturate(4028%) hue-rotate(193deg)
+        brightness(123%) contrast(73%);
+    --filter-white: invert(93%) sepia(100%) saturate(0%) hue-rotate(37deg)
+        brightness(105%) contrast(102%);
 
     /* Elements height */
     --navbar-h: 3.8rem;
@@ -29,6 +43,7 @@
     padding: 0;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        color: var(--ct-darker);
 }
 
 body {
@@ -56,8 +71,7 @@ body {
 /* --------------------- Nav bar -------------------- */
 nav {
     grid-area: navbar;
-    background-color: var(--ct-light);
-    color: var(--ct-darker);
+    background-color: var(--ct-darker);
     font-size: var(--navbar-fs);
     display: flex;
     justify-content: space-between;
@@ -73,16 +87,19 @@ nav {
 }
 
 .logo {
-    width: var(--navbar-fs);
+    width: var(--logo-fs);
     margin-right: 1rem;
+    filter: var(--filter-light);
 }
 
 .logo:hover {
     cursor: pointer;
+    filter: var(--filter-numix);
 }
 
 .app-name {
     display: none;
+    color: var(--ct-light);
 }
 
 .add-btn {
@@ -91,13 +108,15 @@ nav {
     align-items: center;
     gap: 0rem;
     padding: 0.5rem;
-    font-size: 0;
+    font-size: 0; /*0px to hide the label*/
     border-radius: 30px;
-    border: 2px solid var(--ct-darker);
+    border: 0 none;
+    background-color: var(--ct-light);
 }
 
 .add-btn > img {
     width: var(--header-fs);
+    filter: var(--filter-darker)
 }
 
 .add-btn:hover {
@@ -108,15 +127,23 @@ nav {
 /* --------------------- Side panel -------------------- */
 .side-panel {
     grid-area: side-panel;
+    background-color: var(--ct-grey);
+    padding: 1rem;
 }
 
 .side-panel-hidden {
     display: none;
 }
 
+.side-panel > h1 {
+    color: var(--ct-light);
+}
+
 /* --------------------- main panel -------------------- */
 .main-content {
     grid-area: main-content;
+    background-color: var(--ct-light);
+    padding: 1rem;
 }
 
 /* --------------------- Footer -------------------- */
@@ -125,7 +152,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--ct-light);
+    background-color: var(--ct-darker);
 }
 
 footer > .github-contact-info {
@@ -135,19 +162,20 @@ footer > .github-contact-info {
     flex-wrap: nowrap;
     gap: 0.5rem;
     text-decoration: none;
-    color: var(--ct-darker);
-}
-
-footer > .github-contact-info:hover {
-    color: var(--ct-numix);
 }
 
 footer > .github-contact-info > .footer-logo {
     width: var(--logo-fs);
+    filter: var(--filter-numix);
 }
 
 footer > .github-contact-info > .github-user {
     font-size: var(--logo-fs);
+    color: var(--ct-light);
+}
+
+footer > .github-contact-info > .github-user:hover {
+    color: var(--ct-numix);
 }
 
 /* //--------------------------------------------------------------// */
@@ -175,12 +203,13 @@ footer > .github-contact-info > .github-user {
     .add-btn {
         font-size: var(--navbar-fs);
         gap: 0.5rem;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
     }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
-        --logo-fs: 1.6rem;
+        --logo-fs: 1.5rem;
         --navbar-fs: 1.1rem;
         --header-fs: 2rem;
         --subheader-fs: 1.6rem;
