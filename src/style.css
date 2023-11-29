@@ -129,6 +129,7 @@ nav {
     grid-area: side-panel;
     background-color: var(--ct-grey);
     padding: 1rem;
+    overflow: auto;
 }
 
 .side-panel-hidden {
@@ -139,11 +140,38 @@ nav {
     color: var(--ct-light);
 }
 
+.sp-group {
+    height: var(--header-fs);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.sp-group:hover {
+    cursor: pointer;
+    background-color: var(--ct-dark);
+    border: 0px solid var(--ct-dark);
+    border-radius: 10px;
+}
+
+.sp-group > .sp-g-icon {
+    width: var(--subheader-fs);
+    filter: var(--filter-light);
+}
+
+.sp-group > .sp-g-label {
+    text-transform: capitalize;
+    color: var(--ct-light);
+}
+
 /* --------------------- main panel -------------------- */
 .main-content {
     grid-area: main-content;
     background-color: var(--ct-light);
     padding: 1rem;
+    overflow: auto;
 }
 
 /* --------------------- Footer -------------------- */

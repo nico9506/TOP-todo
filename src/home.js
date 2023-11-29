@@ -1,10 +1,14 @@
 /**
- * Creates the HTML elements
+ * Creates the HTML elements to generate the DOM
  */
 
 import iconMenu from "./assets/bars-solid.svg";
 import iconPlus from "./assets/circle-plus-solid.svg";
 import githubIcon from "./assets/github.svg";
+import homeIcon from "./assets/home.svg";
+import todayIcon from "./assets/today.svg";
+import calendarIcon from "./assets/calendar.svg";
+import anytimeIcon from "./assets/stack.svg";
 
 export function generateNavigationBar() {
     /**
@@ -82,15 +86,25 @@ export function generateSidePanel() {
     /**
      * Creates the side-panel element and returns the HTML element
      */
+    //Default group filters
+    const HOME = "home";
+    const TODAY = "today";
+    const UPCOMING = "upcoming";
+    const ANYTIME = "anytime";
 
     const sidePanel = document.createElement('aside');
     sidePanel.classList.add('side-panel');
     sidePanel.id = 'sidePanel';
 
     const text = document.createElement('h1');
-    text.textContent = "Sidepanel title";
+    text.textContent = "Side-panel title";
 
     sidePanel.appendChild(text);
+    
+    sidePanel.appendChild(createSidePanelGroup(HOME, homeIcon));
+    sidePanel.appendChild(createSidePanelGroup(TODAY, todayIcon));
+    sidePanel.appendChild(createSidePanelGroup(UPCOMING, calendarIcon));
+    sidePanel.appendChild(createSidePanelGroup(ANYTIME, anytimeIcon));
 
     return sidePanel;
 }
@@ -109,4 +123,26 @@ export function generateMainPanel() {
     mainPanel.appendChild(text);
 
     return mainPanel;
+}
+
+function createSidePanelGroup(groupName, icon_path) {
+    /**
+     * Creates and returns the HTML element to use place in the side panel menu
+     */
+
+    const group = document.createElement('div');
+    group.id = "sp_g_" + groupName;
+    group.classList.add('sp-group');
+
+    const icon = new Image();
+    icon.src = icon_path;
+    icon.classList.add("sp-g-icon");
+    group.appendChild(icon);
+
+    const label = document.createElement('h3');
+    label.classList.add("sp-g-label");
+    label.textContent = groupName;
+    group.appendChild(label);
+
+    return group;
 }
