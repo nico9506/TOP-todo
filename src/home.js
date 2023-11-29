@@ -9,6 +9,7 @@ import homeIcon from "./assets/home.svg";
 import todayIcon from "./assets/today.svg";
 import calendarIcon from "./assets/calendar.svg";
 import anytimeIcon from "./assets/stack.svg";
+import newListIcon from "./assets/folder-plus.svg";
 
 export function generateNavigationBar() {
     /**
@@ -36,15 +37,8 @@ export function generateNavigationBar() {
     appName.textContent = DEFAULT_TITLE;
     titleContainer.appendChild(appName);
 
-    // Add task button contains an Icon and a label
-    const addBtn = document.createElement("button");
-    addBtn.classList.add("add-btn");
-    addBtn.id = "addBtn";
-    addBtn.textContent = BUTTON_LABEL;
-
-    const plusIcon = new Image();
-    plusIcon.src = iconPlus;
-    addBtn.appendChild(plusIcon);
+    // Add-new-task button
+    const addBtn = createBtnIconLabel(BUTTON_LABEL, iconPlus);
 
     navbar.appendChild(titleContainer);
     navbar.appendChild(addBtn);
@@ -86,21 +80,22 @@ export function generateSidePanel() {
     /**
      * Creates the side-panel element and returns the HTML element
      */
+
+    //New list btn label
+    const NEW_LIST_BTN_LABEL = "new list";
+
     //Default group filters
     const HOME = "home";
     const TODAY = "today";
     const UPCOMING = "upcoming";
     const ANYTIME = "anytime";
 
-    const sidePanel = document.createElement('aside');
-    sidePanel.classList.add('side-panel');
-    sidePanel.id = 'sidePanel';
+    const sidePanel = document.createElement("aside");
+    sidePanel.classList.add("side-panel");
+    sidePanel.id = "sidePanel";
 
-    const text = document.createElement('h1');
-    text.textContent = "Side-panel title";
+    sidePanel.appendChild(createBtnIconLabel(NEW_LIST_BTN_LABEL, newListIcon));
 
-    sidePanel.appendChild(text);
-    
     sidePanel.appendChild(createSidePanelGroup(HOME, homeIcon));
     sidePanel.appendChild(createSidePanelGroup(TODAY, todayIcon));
     sidePanel.appendChild(createSidePanelGroup(UPCOMING, calendarIcon));
@@ -114,10 +109,10 @@ export function generateMainPanel() {
      * Creates the main content panel element and returns the HTML element
      */
 
-    const mainPanel = document.createElement('main');
-    mainPanel.classList.add('main-content');
+    const mainPanel = document.createElement("main");
+    mainPanel.classList.add("main-content");
 
-    const text = document.createElement('h1');
+    const text = document.createElement("h1");
     text.textContent = "MainPanel title";
 
     mainPanel.appendChild(text);
@@ -130,19 +125,37 @@ function createSidePanelGroup(groupName, icon_path) {
      * Creates and returns the HTML element to use place in the side panel menu
      */
 
-    const group = document.createElement('div');
+    const group = document.createElement("div");
     group.id = "sp_g_" + groupName;
-    group.classList.add('sp-group');
+    group.classList.add("sp-group");
 
     const icon = new Image();
     icon.src = icon_path;
     icon.classList.add("sp-g-icon");
     group.appendChild(icon);
 
-    const label = document.createElement('h3');
+    const label = document.createElement("h3");
     label.classList.add("sp-g-label");
     label.textContent = groupName;
     group.appendChild(label);
 
     return group;
+}
+
+function createBtnIconLabel(label, icon_path) {
+    /**
+     * Returns a created button element containing an Icon and a text label
+     */
+    
+    // Add task button contains an Icon and a label
+    const btn = document.createElement("button");
+    btn.classList.add("btn-icon-label");
+    btn.id = "btn-" + label.toLowerCase().replace(" ", "_");
+    btn.textContent = label;
+
+    const icon = new Image();
+    icon.src = icon_path;
+    btn.appendChild(icon);
+
+    return btn;
 }

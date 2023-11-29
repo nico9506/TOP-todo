@@ -22,7 +22,7 @@
 
     /* Elements height */
     --navbar-h: 3.8rem;
-    --side-panel-length: 10rem;
+    --side-panel-length: 15rem;
     --content-h: calc(
         100vh - var(--navbar-h) - var(--footer-h) - var(--side-panel-length)
     );
@@ -102,7 +102,7 @@ nav {
     color: var(--ct-light);
 }
 
-.add-btn {
+.btn-icon-label {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -112,16 +112,21 @@ nav {
     border-radius: 30px;
     border: 0 none;
     background-color: var(--ct-light);
+    text-transform: capitalize;
 }
 
-.add-btn > img {
+.btn-icon-label > img {
     width: var(--header-fs);
     filter: var(--filter-darker)
 }
 
-.add-btn:hover {
+.btn-icon-label:hover {
     cursor: pointer;
     background-color: var(--ct-numix);
+}
+
+#sp_g_home {
+    margin-top: 2rem;
 }
 
 /* --------------------- Side panel -------------------- */
@@ -228,7 +233,7 @@ footer > .github-contact-info > .github-user:hover {
         display: block;
     }
 
-    .add-btn {
+    .btn-icon-label {
         font-size: var(--navbar-fs);
         gap: 0.5rem;
         padding: 0.5rem 1rem 0.5rem 0.5rem;
@@ -245,7 +250,7 @@ footer > .github-contact-info > .github-user:hover {
         --content-fs: 1rem;
 
         /* Elements height */
-        --side-panel-length: min(20rem, 40%);
+        --side-panel-length: min(13rem, 40%);
         --content-h: calc(100vh - var(--navbar-h) - var(--footer-h));
     }
 
