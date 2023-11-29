@@ -20,3 +20,11 @@ function toggleSidePanel() {
     //CSS Class "side-panel-hidden": change display to 'none'
     document.getElementById("sidePanel").classList.toggle("side-panel-hidden");
 }
+
+function addNewList(listName) {
+    /**
+     * Generates a new list and append the list element to the sidePanel menu
+     */
+
+    
+}

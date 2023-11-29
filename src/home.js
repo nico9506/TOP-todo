@@ -96,6 +96,8 @@ export function generateSidePanel() {
 
     sidePanel.appendChild(createBtnIconLabel(NEW_LIST_BTN_LABEL, newListIcon));
 
+    sidePanel.appendChild(createNewListForm());
+
     sidePanel.appendChild(createSidePanelGroup(HOME, homeIcon));
     sidePanel.appendChild(createSidePanelGroup(TODAY, todayIcon));
     sidePanel.appendChild(createSidePanelGroup(UPCOMING, calendarIcon));
@@ -158,4 +160,55 @@ function createBtnIconLabel(label, icon_path) {
     btn.appendChild(icon);
 
     return btn;
+}
+
+function createNewListForm() {
+    /**
+     * Generates the fields to create a new list.
+     * Return the container with its elements. 
+     */
+
+    const POPUP_TITLE = "Create a new list";
+
+    const popupForm = document.createElement('div');
+    popupForm.id = "new_list_input_form";
+    popupForm.classList.add("popup");
+
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+
+    const title = document.createElement('h1');
+    title.classList.add("popup-title");
+    title.textContent = POPUP_TITLE;
+    form.appendChild(title);
+
+    // const labelNewListName = document.createElement('label');
+    // labelNewListName.setAttribute("for", "listName");
+    // labelNewListName.textContent = "List name"
+    // form.appendChild(labelNewListName);
+
+    const inputNewListName = document.createElement('input');
+    inputNewListName.type = 'text';
+    inputNewListName.placeholder = "New list name";
+    inputNewListName.name = "listName";
+    form.appendChild(inputNewListName);
+
+    const addBtn = document.createElement('button');
+    addBtn.type = "button";
+    addBtn.id = "add_list_btn_form";
+    addBtn.classList.add("btn-form");
+    addBtn.textContent = "Add";
+    form.appendChild(addBtn);
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = "button";
+    cancelBtn.id = "cancel_btn_form";
+    cancelBtn.classList.add("btn-form");
+    cancelBtn.classList.add("cancel");
+    cancelBtn.textContent = "Cancel";
+    form.appendChild(cancelBtn);
+
+    popupForm.appendChild(form);
+
+    return popupForm;
 }

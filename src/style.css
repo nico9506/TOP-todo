@@ -129,6 +129,10 @@ nav {
     margin-top: 2rem;
 }
 
+#sp_g_anytime {
+    margin-bottom: 2rem;
+}
+
 /* --------------------- Side panel -------------------- */
 .side-panel {
     grid-area: side-panel;
@@ -169,6 +173,18 @@ nav {
 .sp-group > .sp-g-label {
     text-transform: capitalize;
     color: var(--ct-light);
+}
+
+.popup {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--ct-darker);
+    border-radius: 10px;
+}
+
+.popup-title {
+    color: var(--ct-light);
+    font-size: var(--navbar-fs);
 }
 
 /* --------------------- main panel -------------------- */
