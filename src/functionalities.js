@@ -1,5 +1,5 @@
 /**
- * Collection of utilities as validations, classes and events
+ * Collection of utilities as validations, functions and events
  */
 
 export function addEvLToggleMenu() {
