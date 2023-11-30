@@ -45,10 +45,11 @@
     padding: 0;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        color: var(--ct-darker);
+    color: var(--ct-darker);
 }
 
 body {
+    background-color: var(--ct-grey);
     display: grid;
     grid-template:
         var(--navbar-h) var(--side-panel-length) var(--content-h) var(
@@ -102,6 +103,10 @@ nav {
 .app-name {
     display: none;
     color: var(--ct-light);
+    font-family: cursive, sans-serif;
+    font-style: italic;
+    font-size: var(--header-fs);
+    padding-top: 10px;
 }
 
 .btn-icon-label {
@@ -119,7 +124,7 @@ nav {
 
 .btn-icon-label > img {
     width: var(--header-fs);
-    filter: var(--filter-darker)
+    filter: var(--filter-darker);
 }
 
 .btn-icon-label:hover {
@@ -141,6 +146,7 @@ nav {
     background-color: var(--ct-grey);
     padding: 1rem;
     overflow: auto;
+    animation: slideDown 0.5s;
 }
 
 .side-panel-hidden {
@@ -188,6 +194,7 @@ nav {
 
 .popup-unhidden {
     display: block;
+    animation: scaleX 0.5s;
 }
 
 .popup-title {
@@ -327,10 +334,53 @@ footer > .github-contact-info > .github-user:hover {
             "main-content main-content"
             "footer footer";
     }
+
+    .side-panel {
+        animation: slideRight 0.5s;
+    }
+    
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+}
+
+/* ------------------------ Animations --------------------*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translate(0, -100%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translate(-100%);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes scaleX {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(100%);
+    }
 }

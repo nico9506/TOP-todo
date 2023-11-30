@@ -7,6 +7,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "TODO x Hacer!",
+            favicon: 'src/assets/favicon.ico',
         }),
     ],
     output: {
