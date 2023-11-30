@@ -4,6 +4,8 @@
     --ct-dark: #3d3d3d;
     --ct-grey: #535353;
     --ct-numix: #d64937;
+    --ct-blue: #379cd6;
+    --ct-green: #5cd637;
     --ct-light: #dcdcdc;
     --ct-white: #ffffff;
     /* Color theme (filter) for SVG images */
@@ -180,11 +182,48 @@ nav {
     padding: 0.5rem;
     background-color: var(--ct-darker);
     border-radius: 10px;
+    width: min(100%, 18rem);
+    display: none;
+}
+
+.popup-unhidden {
+    display: block;
 }
 
 .popup-title {
     color: var(--ct-light);
     font-size: var(--navbar-fs);
+    width: 100%;
+    text-align: center;
+}
+
+.popup > .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.popup > .form-container > input {
+    width: 100%;
+    font-size: var(--content-fs);
+}
+
+.popup > .form-container > .btn-form {
+    width: 47%;
+    font-size: var(--content-fs);
+}
+
+.popup > .form-container > .btn-form:hover {
+    cursor: pointer;
+    background-color: var(--ct-green);
+    border: 2px solid var(--ct-green);
+    border-radius: 5px;
+}
+.popup > .form-container > .cancel:hover {
+    background-color: var(--ct-numix);
+    border: 2px solid var(--ct-numix);
 }
 
 /* --------------------- main panel -------------------- */

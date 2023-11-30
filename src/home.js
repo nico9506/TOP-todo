@@ -189,6 +189,7 @@ function createNewListForm() {
 
     const inputNewListName = document.createElement('input');
     inputNewListName.type = 'text';
+    inputNewListName.id = 'new_list_input_field_text'
     inputNewListName.placeholder = "New list name";
     inputNewListName.name = "listName";
     form.appendChild(inputNewListName);
