@@ -1,5 +1,6 @@
 import * as AppInterface from "./home.js";
 import * as AppFunctionalities from "./functionalities.js";
+import * as Model from "./model.js";
 import "./style.css";
 
 (function generateWebPage() {

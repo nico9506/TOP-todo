@@ -1,6 +1,8 @@
 /**
- * Collection of utilities as validations, functions and events
+ * Collection of utilities as Constants, validations, functions and events
  */
+
+export const NO_DATE = new Date(864000000000000);
 
 export function addEvLToggleMenu() {
     /**
@@ -44,4 +46,11 @@ function addNewList() {
     /**
      * Generates a new list and append the list element to the sidePanel menu
      */
+}
+
+export function uniqueID() {
+    /**
+     * Generates an unique ID. Used to identify each List or Task
+     */
+    return Math.floor(Math.random() * Date.now());
 }
