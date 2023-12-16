@@ -21,6 +21,17 @@ export function addEvLToggleMenu() {
     // Button in input-form (new list) to cancel (close) the New-List form
     const cancelNewListForm = document.getElementById("cancel_btn_form");
     cancelNewListForm.addEventListener("click", toggleNewListForm);
+
+    // Button New Task in navbar to show the popup form
+    const newTaskForm = document.getElementById("btn-new_task");
+    newTaskForm.addEventListener("click", toggleNewTaskPopup);
+}
+
+function toggleNewTaskPopup() {
+    // CSS class
+    document
+        .getElementById("new_task_popup")
+        .classList.toggle("popup-unhidden");
 }
 
 function toggleSidePanel() {

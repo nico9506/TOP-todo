@@ -17,6 +17,8 @@ import "./style.css";
     body.appendChild(AppInterface.generateMainPanel());
 
     body.appendChild(AppInterface.generateFooter());
+
+    body.appendChild(AppInterface.generateNewTaskPopup());
 })();
 
 (function addEvListeners() {

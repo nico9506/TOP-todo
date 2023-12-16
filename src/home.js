@@ -122,6 +122,112 @@ export function generateMainPanel() {
     return mainPanel;
 }
 
+export function generateNewTaskPopup() {
+    /**
+     * Generates the HTML element box containing the proper fields 
+     * to create TASKS
+     */
+
+    const POPUP_TITLE = "Add a new Task!";
+
+    const popupForm = document.createElement('div');
+    popupForm.id = "new_task_popup";
+    popupForm.classList.add("popup-task");
+
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+
+    const title = document.createElement('h1');
+    title.classList.add("popup-title");
+    title.textContent = POPUP_TITLE;
+    form.appendChild(title);
+
+
+    // Name
+    const labelNewTaskName = document.createElement('label');
+    labelNewTaskName.setAttribute("for", "taskName");
+    labelNewTaskName.textContent = "Task name"
+    form.appendChild(labelNewTaskName);
+
+    const inputNewTaskName = document.createElement('input');
+    inputNewTaskName.type = 'text';
+    inputNewTaskName.id = 'new_task_input_name';
+    inputNewTaskName.placeholder = "New task name";
+    inputNewTaskName.name = "taskName";
+    form.appendChild(inputNewTaskName);
+
+    // Description
+    const labelNewTaskDesc = document.createElement('label');
+    labelNewTaskDesc.setAttribute("for", "taskDesc");
+    labelNewTaskDesc.textContent = "Description";
+    form.appendChild(labelNewTaskDesc);
+
+    const inputNewTaskDesc = document.createElement('input');
+    inputNewTaskDesc.type = 'text';
+    inputNewTaskDesc.id = 'new_task_input_desc';
+    inputNewTaskDesc.placeholder = "Task description";
+    inputNewTaskDesc.name = "taskDesc";
+    form.appendChild(inputNewTaskDesc);
+
+    // Due date
+    const labelNewTaskDate = document.createElement('label');
+    labelNewTaskDate.setAttribute("for", "taskDate");
+    labelNewTaskDate.textContent = "Deadline"
+    form.appendChild(labelNewTaskDate);
+
+    const inputNewTaskDate = document.createElement('input');
+    inputNewTaskDate.type = 'date';
+    inputNewTaskDate.id = 'new_task_input_date';
+    // inputNewTaskDate.placeholder = "Task description";
+    inputNewTaskDate.name = "taskDate";
+    form.appendChild(inputNewTaskDate);
+
+    // Parent list
+    // const labelNewTaskDate = document.createElement('label');
+    // labelNewTaskDate.setAttribute("for", "taskDate");
+    // labelNewTaskDate.textContent = "Deadline"
+    // form.appendChild(labelNewTaskDate);
+
+    // const inputNewTaskDate = document.createElement('input');
+    // inputNewTaskDate.type = 'date';
+    // inputNewTaskDate.id = 'new_task_input_date';
+    // inputNewTaskDate.placeholder = "Task description";
+    // inputNewTaskDate.name = "taskDate";
+    // form.appendChild(inputNewTaskDate);
+
+    // Priority
+    const labelNewTaskPriority = document.createElement('label');
+    labelNewTaskPriority.setAttribute("for", "taskPriority");
+    labelNewTaskPriority.textContent = "Deadline"
+    form.appendChild(labelNewTaskPriority);
+
+    const inputNewTaskPriority = document.createElement('input');
+    inputNewTaskPriority.type = 'text';
+    inputNewTaskPriority.id = 'new_task_input_priority';
+    // inputNewTaskDate.placeholder = "Task description";
+    inputNewTaskPriority.name = "taskPriority";
+    form.appendChild(inputNewTaskPriority);
+
+    const addBtn = document.createElement('button');
+    addBtn.type = "button";
+    addBtn.id = "add_task_btn_form";
+    addBtn.classList.add("btn-form");
+    addBtn.textContent = "Add";
+    form.appendChild(addBtn);
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = "button";
+    cancelBtn.id = "cancel_btn_form";
+    cancelBtn.classList.add("btn-form");
+    cancelBtn.classList.add("cancel");
+    cancelBtn.textContent = "Cancel";
+    form.appendChild(cancelBtn);
+
+    popupForm.appendChild(form);
+
+    return popupForm;
+}
+
 function createSidePanelGroup(groupName, icon_path) {
     /**
      * Creates and returns the HTML element to use place in the side panel menu
