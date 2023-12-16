@@ -204,7 +204,7 @@ nav {
     text-align: center;
 }
 
-.popup > .form-container {
+.form-container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -212,23 +212,23 @@ nav {
     gap: 0.5rem;
 }
 
-.popup > .form-container > input {
+.form-container > input {
     width: 100%;
     font-size: var(--content-fs);
 }
 
-.popup > .form-container > .btn-form {
+.form-container > .btn-form {
     width: 47%;
     font-size: var(--content-fs);
 }
 
-.popup > .form-container > .btn-form:hover {
+.form-container > .btn-form:hover {
     cursor: pointer;
     background-color: var(--ct-green);
     border: 2px solid var(--ct-green);
     border-radius: 5px;
 }
-.popup > .form-container > .cancel:hover {
+.form-container > .cancel:hover {
     background-color: var(--ct-numix);
     border: 2px solid var(--ct-numix);
 }
@@ -243,14 +243,32 @@ nav {
 
 .popup-task {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: 1rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
     padding: 0.5rem;
     background-color: var(--ct-darker);
     border-radius: 10px;
     width: min(100%, 18rem);
     display: none;
+}
+
+.popup-title {
+    color: var(--ct-light);
+}
+
+.popup-task > .form-container > label {
+    color: var(--ct-light);
+    width: 100%;
+    text-align: left;
+    margin-top: 0.5rem;
+}
+
+.popup-task > .form-container > input:last-of-type {
+    margin-bottom: 1rem;
 }
 /* --------------------- Footer -------------------- */
 footer {
@@ -349,7 +367,6 @@ footer > .github-contact-info > .github-user:hover {
     .side-panel {
         animation: slideRight 0.5s;
     }
-    
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {

@@ -129,6 +129,10 @@ export function generateNewTaskPopup() {
      */
 
     const POPUP_TITLE = "Add a new Task!";
+    const LABEL_NAME = "Task name";
+    const LABEL_DESC = "Description";
+    const LABEL_DATE = "Deadline";
+    const LABEL_PRIORITY = "Priority";
 
     const popupForm = document.createElement('div');
     popupForm.id = "new_task_popup";
@@ -146,7 +150,7 @@ export function generateNewTaskPopup() {
     // Name
     const labelNewTaskName = document.createElement('label');
     labelNewTaskName.setAttribute("for", "taskName");
-    labelNewTaskName.textContent = "Task name"
+    labelNewTaskName.textContent = LABEL_NAME;
     form.appendChild(labelNewTaskName);
 
     const inputNewTaskName = document.createElement('input');
@@ -159,7 +163,7 @@ export function generateNewTaskPopup() {
     // Description
     const labelNewTaskDesc = document.createElement('label');
     labelNewTaskDesc.setAttribute("for", "taskDesc");
-    labelNewTaskDesc.textContent = "Description";
+    labelNewTaskDesc.textContent = LABEL_DESC;
     form.appendChild(labelNewTaskDesc);
 
     const inputNewTaskDesc = document.createElement('input');
@@ -172,7 +176,7 @@ export function generateNewTaskPopup() {
     // Due date
     const labelNewTaskDate = document.createElement('label');
     labelNewTaskDate.setAttribute("for", "taskDate");
-    labelNewTaskDate.textContent = "Deadline"
+    labelNewTaskDate.textContent = LABEL_DATE;
     form.appendChild(labelNewTaskDate);
 
     const inputNewTaskDate = document.createElement('input');
@@ -198,7 +202,7 @@ export function generateNewTaskPopup() {
     // Priority
     const labelNewTaskPriority = document.createElement('label');
     labelNewTaskPriority.setAttribute("for", "taskPriority");
-    labelNewTaskPriority.textContent = "Deadline"
+    labelNewTaskPriority.textContent = LABEL_PRIORITY;
     form.appendChild(labelNewTaskPriority);
 
     const inputNewTaskPriority = document.createElement('input');
@@ -217,9 +221,8 @@ export function generateNewTaskPopup() {
 
     const cancelBtn = document.createElement('button');
     cancelBtn.type = "button";
-    cancelBtn.id = "cancel_btn_form";
-    cancelBtn.classList.add("btn-form");
-    cancelBtn.classList.add("cancel");
+    cancelBtn.id = "cancel_btn_task_form";
+    cancelBtn.classList.add("btn-form", "cancel");
     cancelBtn.textContent = "Cancel";
     form.appendChild(cancelBtn);
 
