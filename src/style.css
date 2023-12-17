@@ -37,6 +37,8 @@
     --subheader-fs: 1.4rem;
     --subheader-sm-fs: 1.3rem;
     --content-fs: 0.9rem;
+
+    --taskRow-h: 4rem;
 }
 
 * {
@@ -238,7 +240,11 @@ nav {
     grid-area: main-content;
     background-color: var(--ct-light);
     padding: 1rem;
-    overflow: auto;
+    display: grid;
+    grid-template: 4rem 1fr / 1fr;
+    grid-template-areas:
+        "parent-list-name"
+        "tasks-grid";
 }
 
 .popup-task {
@@ -258,6 +264,7 @@ nav {
 
 .popup-title {
     color: var(--ct-light);
+    grid-area: parent-list-name;
 }
 
 .popup-task > .form-container > label {
@@ -270,6 +277,49 @@ nav {
 .popup-task > .form-container > input:last-of-type {
     margin-bottom: 1rem;
 }
+
+.tasks-section {
+    grid-area: tasks-grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    overflow-y: auto;
+}
+
+.task-container {
+    width: 100%;
+    display: grid;
+    grid-template: var(--taskRow-h) var(--taskRow-h) calc(var(--taskRow-h) * 2) / 4fr 1fr 1fr;
+    grid-template-areas:
+        "taskName taskEdit taskDelete"
+        "taskDateAndParent taskDateAndParent taskDateAndParent"
+        "taskDesc taskDesc taskDesc";
+}
+
+.task-name {
+    grid-area: taskName;
+    overflow: auto;
+}
+
+.task-desc {
+    grid-area: taskDesc;
+    overflow: auto;
+}
+
+.task-date-list-info {
+    grid-area: taskDateAndParent;
+}
+
+.btn-edit-task {
+    grid-area: taskEdit;
+}
+
+.btn-delete-task {
+    grid-area: taskDelete;
+}
+
 /* --------------------- Footer -------------------- */
 footer {
     grid-area: footer;
@@ -366,6 +416,13 @@ footer > .github-contact-info > .github-user:hover {
 
     .side-panel {
         animation: slideRight 0.5s;
+    }
+
+    .task-container {
+        grid-template: var(--taskRow-h) var(--taskRow-h) / 2fr 3fr 1fr;
+        grid-template-areas:
+            "taskName taskDesc taskEdit"
+            "taskDateAndParent taskDesc taskDelete";
     }
 }
 /* Large devices (laptops/desktops, 992px and up) */
