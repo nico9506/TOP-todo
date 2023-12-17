@@ -10,6 +10,8 @@ import todayIcon from "./assets/today.svg";
 import calendarIcon from "./assets/calendar.svg";
 import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
+import pencilIcon from "./assets/edit.svg";
+import trashIcon from "./assets/trash.svg";
 
 export function generateNavigationBar() {
     /**
@@ -378,12 +380,18 @@ function generateNewTaskElement(name, dueDate, parentList, desc, priority) {
 
     const editTask = document.createElement('button');
     editTask.classList.add('btn-edit-task');
-    editTask.textContent = "edit";
+    const editIcon = new Image();
+    editIcon.src = pencilIcon;
+    editIcon.classList.add("task-controls");
+    editTask.appendChild(editIcon);
     taskContainer.appendChild(editTask);
 
     const deleteTask = document.createElement('button');
     deleteTask.classList.add('btn-delete-task');
-    deleteTask.textContent = "delete";
+    const deleteIcon = new Image();
+    deleteIcon.src = trashIcon;
+    deleteIcon.classList.add("task-controls");
+    deleteTask.appendChild(deleteIcon);
     taskContainer.appendChild(deleteTask);
 
     return taskContainer;

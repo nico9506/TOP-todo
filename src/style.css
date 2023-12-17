@@ -290,6 +290,9 @@ nav {
 
 .task-container {
     width: 100%;
+    border: 1px solid var(--ct-grey);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
     display: grid;
     grid-template: var(--taskRow-h) var(--taskRow-h) calc(var(--taskRow-h) * 2) / 4fr 1fr 1fr;
     grid-template-areas:
@@ -301,6 +304,7 @@ nav {
 .task-name {
     grid-area: taskName;
     overflow: auto;
+    font-size: var(--subheader-fs);
 }
 
 .task-desc {
@@ -310,6 +314,33 @@ nav {
 
 .task-date-list-info {
     grid-area: taskDateAndParent;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-edit-task, .btn-delete-task {
+    background-color: var(--ct-light);
+    /* filter: var(--filter-darker); */
+    border: 0 none;
+    width: var(--header-fs);
+    height: var(--header-fs);
+    justify-self: center;
+    align-self: center;
+}
+
+.btn-edit-task:hover, .btn-delete-task:hover {
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.btn-edit-task:hover {
+    background-color: var(--ct-blue);
+}
+
+.btn-delete-task:hover {
+    background-color: var(--ct-numix);
 }
 
 .btn-edit-task {
@@ -318,6 +349,10 @@ nav {
 
 .btn-delete-task {
     grid-area: taskDelete;
+}
+
+.task-controls {
+    width: var(--subheader-fs)
 }
 
 /* --------------------- Footer -------------------- */
@@ -423,6 +458,10 @@ footer > .github-contact-info > .github-user:hover {
         grid-template-areas:
             "taskName taskDesc taskEdit"
             "taskDateAndParent taskDesc taskDelete";
+    }
+
+    .task-desc {
+        padding-left: 1rem;
     }
 }
 /* Large devices (laptops/desktops, 992px and up) */
