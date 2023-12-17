@@ -4,10 +4,9 @@
 
 export const NO_DATE = new Date(864000000000000);
 
-export function addEvLToggleMenu() {
+export function addEvListeners() {
     /**
-     * Add the eventListener to the menu icon to show and hide the
-     * side panel element
+     * Add the eventListener to the menu and buttons
      */
 
     // Burger menu which contains filters and lists
@@ -25,13 +24,30 @@ export function addEvLToggleMenu() {
     // Button New Task in navbar to show the popup form
     const newTaskForm = document.getElementById("btn-new_task");
     newTaskForm.addEventListener("click", toggleNewTaskPopup);
+
+    // Button in input-form (new task) to cancel (close) the New-task form
+    const cancelNewTaskForm = document.getElementById("cancel_btn_task_form");
+    cancelNewTaskForm.addEventListener("click", toggleNewTaskPopup);
 }
 
 function toggleNewTaskPopup() {
-    // CSS class
+    // CSS class to change the display parameter
     document
         .getElementById("new_task_popup")
         .classList.toggle("popup-unhidden");
+
+    // Cleans the input fields
+    const inputName = document.getElementById("new_task_input_name");
+    inputName.value = "";
+
+    const inputDesc = document.getElementById("new_task_input_desc");
+    inputDesc.value = "";
+
+    const inputDate = document.getElementById("new_task_input_date");
+    inputDate.value = "";
+
+    const inputPriority = document.getElementById("new_task_input_priority");
+    inputPriority.value = "";
 }
 
 function toggleSidePanel() {
@@ -48,7 +64,7 @@ function toggleNewListForm() {
         .getElementById("new_list_input_form")
         .classList.toggle("popup-unhidden");
 
-    //Clean the input field
+    //Cleans the input field
     const input = document.getElementById("new_list_input_field_text");
     input.value = "";
 }

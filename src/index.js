@@ -22,5 +22,5 @@ import "./style.css";
 })();
 
 (function addEvListeners() {
-    AppFunctionalities.addEvLToggleMenu();
+    AppFunctionalities.addEvListeners();
 })();
