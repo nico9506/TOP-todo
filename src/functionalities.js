@@ -1,6 +1,9 @@
 /**
  * Collection of utilities as Constants, validations, functions and events
  */
+import { priorityValues, listArray, tasksArray, addNewTask } from "./model";
+import pencilIcon from "./assets/edit.svg";
+import trashIcon from "./assets/trash.svg";
 
 export const NO_DATE = new Date(864000000000000);
 
@@ -81,3 +84,84 @@ export function uniqueID() {
      */
     return Math.floor(Math.random() * Date.now());
 }
+
+export function refreshTasksView() {
+    /**
+     * Clears the user interface and loads the current tasks array to 
+     * display them
+     */
+
+    const taskPanel = document.getElementById("task_panel");
+
+    //const mainSection = document.getElementById("main_content");
+
+    // Clears the task panel
+    taskPanel.innerHTML = "";
+
+    // Generates HTML elements from the actual tasks from the main array
+    tasksArray.forEach(task => {
+        taskPanel.appendChild(generateNewTaskElement(task));
+    });
+}
+
+
+
+function generateNewTaskElement(taskObject) {
+    /**
+     * Takes a Task (class) element and
+     * returns the HTML task container built with the task properties
+     * name, dueDate, parentList, desc, priority
+     */
+
+    const taskContainer = document.createElement('div');
+    taskContainer.classList.add("task-container");
+
+    const taskName = document.createElement("h1");
+    taskName.textContent = taskObject.name;
+    taskName.classList.add('task-name');
+    taskContainer.appendChild(taskName);
+
+    const taskDateAndListContainer = document.createElement('div');
+    taskDateAndListContainer.classList.add("task-date-list-info");
+    
+    const taskDate = document.createElement("h3");
+    taskDate.classList.add("task-date");
+    taskDate.textContent = taskObject.dueDate;
+    taskDateAndListContainer.appendChild(taskDate);
+    
+    const taskParentList = document.createElement("h3");
+    taskParentList.classList.add("task-parent-list");
+    taskParentList.textContent = taskObject.taskParentList;
+    taskDateAndListContainer.appendChild(taskParentList);
+
+    const taskPriority = document.createElement("h3");
+    taskPriority.classList.add("task-priority");
+    taskPriority.textContent = taskObject.parentList;
+    taskDateAndListContainer.appendChild(taskPriority);
+    
+    taskContainer.appendChild(taskDateAndListContainer);
+
+    const taskDesc = document.createElement("p");
+    taskDesc.classList.add("task-desc");
+    taskDesc.textContent = taskObject.desc;
+    taskContainer.appendChild(taskDesc);
+
+    const editTask = document.createElement('button');
+    editTask.classList.add('btn-edit-task');
+    const editIcon = new Image();
+    editIcon.src = pencilIcon;
+    editIcon.classList.add("task-controls");
+    editTask.appendChild(editIcon);
+    taskContainer.appendChild(editTask);
+
+    const deleteTask = document.createElement('button');
+    deleteTask.classList.add('btn-delete-task');
+    const deleteIcon = new Image();
+    deleteIcon.src = trashIcon;
+    deleteIcon.classList.add("task-controls");
+    deleteTask.appendChild(deleteIcon);
+    taskContainer.appendChild(deleteTask);
+
+    return taskContainer;
+}
+

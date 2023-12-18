@@ -10,8 +10,6 @@ import todayIcon from "./assets/today.svg";
 import calendarIcon from "./assets/calendar.svg";
 import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
-import pencilIcon from "./assets/edit.svg";
-import trashIcon from "./assets/trash.svg";
 
 export function generateNavigationBar() {
     /**
@@ -115,6 +113,7 @@ export function generateMainPanel() {
 
     const mainPanel = document.createElement("main");
     mainPanel.classList.add("main-content");
+    mainPanel.id = "main_content";
 
     const text = document.createElement("h1");
     text.textContent = "MainPanel title";
@@ -122,17 +121,8 @@ export function generateMainPanel() {
 
     // Main container to organize multiple task containers
     const taskSection = document.createElement('div');
+    taskSection.id = "task_panel";
     taskSection.classList.add("tasks-section");
-
-    // Dummy tasks to test CSS
-    taskSection.appendChild(generateNewTaskElement("testName 1", "01-01-24", "urgent", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac molestie ante, nec blandit justo. Donec nibh quam, mattis quis nisl vitae, hendrerit rhoncus ante.", "high"));
-
-    taskSection.appendChild(generateNewTaskElement("testName 2", "05-12-24", "projects", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac molestie ante, nec blandit justo. Donec nibh quam, mattis quis nisl vitae, hendrerit rhoncus ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac molestie ante, nec blandit justo. Donec nibh quam, mattis quis nisl vitae, hendrerit rhoncus ante.", "normal"));
-
-    taskSection.appendChild(generateNewTaskElement("testName 3: : Long task name test to see the grid box behaviour", "12-05-25", "projects", "This a test description", "low"));
-
-    taskSection.appendChild(generateNewTaskElement("testName 4", "05-12-24", "projects", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac molestie ante, nec blandit justo. Donec nibh quam, mattis quis nisl vitae, hendrerit rhoncus ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac molestie ante, nec blandit justo. Donec nibh quam, mattis quis nisl vitae, hendrerit rhoncus ante.", "normal"));
-    // End of dummy tasks
 
     mainPanel.appendChild(taskSection);
 
@@ -338,61 +328,4 @@ function createNewListForm() {
     popupForm.appendChild(form);
 
     return popupForm;
-}
-
-function generateNewTaskElement(name, dueDate, parentList, desc, priority) {
-    /**
-     * Returns the HTML task container with the indicated values
-     */
-
-    const taskContainer = document.createElement('div');
-    taskContainer.classList.add("task-container");
-
-    const taskName = document.createElement("h1");
-    taskName.textContent = name;
-    taskName.classList.add('task-name');
-    taskContainer.appendChild(taskName);
-
-    const taskDateAndListContainer = document.createElement('div');
-    taskDateAndListContainer.classList.add("task-date-list-info");
-    
-    const taskDate = document.createElement("h3");
-    taskDate.classList.add("task-date");
-    taskDate.textContent = dueDate;
-    taskDateAndListContainer.appendChild(taskDate);
-    
-    const taskParentList = document.createElement("h3");
-    taskParentList.classList.add("task-parent-list");
-    taskParentList.textContent = parentList;
-    taskDateAndListContainer.appendChild(taskParentList);
-
-    const taskPriority = document.createElement("h3");
-    taskPriority.classList.add("task-priority");
-    taskPriority.textContent = priority;
-    taskDateAndListContainer.appendChild(taskPriority);
-    
-    taskContainer.appendChild(taskDateAndListContainer);
-
-    const taskDesc = document.createElement("p");
-    taskDesc.classList.add("task-desc");
-    taskDesc.textContent = desc;
-    taskContainer.appendChild(taskDesc);
-
-    const editTask = document.createElement('button');
-    editTask.classList.add('btn-edit-task');
-    const editIcon = new Image();
-    editIcon.src = pencilIcon;
-    editIcon.classList.add("task-controls");
-    editTask.appendChild(editIcon);
-    taskContainer.appendChild(editTask);
-
-    const deleteTask = document.createElement('button');
-    deleteTask.classList.add('btn-delete-task');
-    const deleteIcon = new Image();
-    deleteIcon.src = trashIcon;
-    deleteIcon.classList.add("task-controls");
-    deleteTask.appendChild(deleteIcon);
-    taskContainer.appendChild(deleteTask);
-
-    return taskContainer;
 }

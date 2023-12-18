@@ -1,10 +1,11 @@
 /**
- * Task and list classes
+ * Task and list classes.
+ * Included DB (arrays of tasks and lists)
  */
 import { uniqueID } from "./functionalities";
 import { NO_DATE } from "./functionalities";
 
-class Task {
+export class Task {
     /**
      * Task class to model them in the user interface
      * @param {string} taskName
@@ -20,7 +21,7 @@ class Task {
     #_dueDate;
     #_parentList;
     #_priority;
-    #_taskId;    
+    #_taskId;
 
     constructor(
         taskName,
@@ -117,3 +118,29 @@ export class TaskList {
         return this.#_listId;
     }
 }
+
+// Task priority values
+export const priorityValues = Object.freeze({
+    LOW: -1,
+    MEDIUM: 0,
+    HIGH: 1,
+});
+
+// Array to contain all created tasks
+export const tasksArray = [];
+
+export function addNewTask(
+    name,
+    description = "",
+    dueDate = NO_DATE,
+    parentList = "General",
+    priority = 0
+) {
+    const newTask = new Task(name, description, dueDate, parentList, priority);
+    tasksArray.push(newTask);
+    console.log("New task added to array: " + newTask.id);
+}
+
+// Array to contain all created taskLists.
+// Contains the list 'General' by default. This list will be linked to the Home (side-panel menu)
+export const listArray = [new TaskList("General")];
