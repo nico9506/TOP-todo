@@ -31,6 +31,10 @@ export function addEvListeners() {
     // Button in input-form (new task) to cancel (close) the New-task form
     const cancelNewTaskForm = document.getElementById("cancel_btn_task_form");
     cancelNewTaskForm.addEventListener("click", toggleNewTaskPopup);
+
+    // Button in input-form (new task) to create and add a new task
+    const addNewTaskBtn = document.getElementById("add_task_btn_form");
+    addNewTaskBtn.addEventListener("click", createTaskObjectFromPopupForm);
 }
 
 function toggleNewTaskPopup() {
@@ -104,7 +108,23 @@ export function refreshTasksView() {
     });
 }
 
+function createTaskObjectFromPopupForm() {
+    /**
+     * Creates a new Task using the form input fields of the NewTask popup
+     */
 
+    const taskNameForm = document.getElementById("new_task_input_name");
+    const taskDescForm = document.getElementById("new_task_input_desc");
+    const taskDateForm = document.getElementById("new_task_input_date");
+    const taskPriorityForm = document.getElementById("new_task_input_priority");
+    // const taskNameForm = document.getElementById("new_task_input_parent");
+
+    addNewTask(taskNameForm.value, taskDescForm.value, taskDateForm.value, null, taskPriorityForm.value);
+
+    refreshTasksView();
+
+    toggleNewTaskPopup();
+}
 
 function generateNewTaskElement(taskObject) {
     /**

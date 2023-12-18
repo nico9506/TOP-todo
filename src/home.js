@@ -147,6 +147,7 @@ export function generateNewTaskPopup() {
 
     const form = document.createElement('form');
     form.classList.add('form-container');
+    form.action = "javascript:void(0);"
 
     const title = document.createElement('h1');
     title.classList.add("popup-title");
@@ -165,6 +166,7 @@ export function generateNewTaskPopup() {
     inputNewTaskName.id = 'new_task_input_name';
     inputNewTaskName.placeholder = "New task name";
     inputNewTaskName.name = "taskName";
+    inputNewTaskName.required;
     form.appendChild(inputNewTaskName);
 
     // Description
@@ -219,11 +221,11 @@ export function generateNewTaskPopup() {
     inputNewTaskPriority.name = "taskPriority";
     form.appendChild(inputNewTaskPriority);
 
-    const addBtn = document.createElement('button');
-    addBtn.type = "button";
+    const addBtn = document.createElement('input');
+    addBtn.type = "submit";
     addBtn.id = "add_task_btn_form";
     addBtn.classList.add("btn-form");
-    addBtn.textContent = "Add";
+    addBtn.value = "Add";
     form.appendChild(addBtn);
 
     const cancelBtn = document.createElement('button');

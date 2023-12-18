@@ -21,10 +21,6 @@ import "./style.css";
     body.appendChild(AppInterface.generateNewTaskPopup());
 
     AppFunctionalities.refreshTasksView();
-
-    Model.addNewTask("name test", "desc test", "01 01 23");
-
-    AppFunctionalities.refreshTasksView();
 })();
 
 (function addEvListeners() {
