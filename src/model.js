@@ -2,7 +2,7 @@
  * Task and list classes.
  * Included DB (arrays of tasks and lists)
  */
-import { uniqueID } from "./functionalities";
+import { refreshTasksView, uniqueID } from "./functionalities";
 import { NO_DATE } from "./functionalities";
 
 export class Task {
@@ -130,6 +130,9 @@ export const priorityValues = Object.freeze({
 export const tasksArray = [];
 
 export function addNewTask(
+    /**
+     * Creates a new Task object before adding it to the taskArray[]
+     */
     name,
     description = "",
     dueDate = NO_DATE,
@@ -139,6 +142,25 @@ export function addNewTask(
     const newTask = new Task(name, description, dueDate, parentList, priority);
     tasksArray.push(newTask);
     console.log("New task added to array: " + newTask.id);
+}
+
+export function searchAndDeleteTask() {
+    /**
+     * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
+     * If there's a coincidence, the array's element is deleted
+     */
+    const index = 0;
+
+    for (let i = 0; i < tasksArray.length; i++) {
+        if (Object.values(tasksArray[i]).includes(this.id)) {
+            index = i;
+        }
+    }
+
+    if (index > -1) tasksArray.splice(index, 1);
+    console.log("Deleted permanently: " + this.id);
+
+    refreshTasksView();
 }
 
 // Array to contain all created taskLists.

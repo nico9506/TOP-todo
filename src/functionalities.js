@@ -1,7 +1,7 @@
 /**
  * Collection of utilities as Constants, validations, functions and events
  */
-import { priorityValues, listArray, tasksArray, addNewTask } from "./model";
+import { priorityValues, listArray, tasksArray, addNewTask, searchAndDeleteTask } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
 
@@ -179,6 +179,8 @@ function generateNewTaskElement(taskObject) {
     const deleteIcon = new Image();
     deleteIcon.src = trashIcon;
     deleteIcon.classList.add("task-controls");
+    deleteIcon.id = taskObject.id;
+    deleteIcon.addEventListener('click', searchAndDeleteTask);
     deleteTask.appendChild(deleteIcon);
     taskContainer.appendChild(deleteTask);
 
