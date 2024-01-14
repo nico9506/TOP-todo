@@ -135,8 +135,8 @@ export function generateNewTaskPopup() {
      * to create TASKS
      */
 
-    const POPUP_TITLE = "Add a new Task!";
-    const LABEL_NAME = "Task name";
+    const POPUP_TITLE = "Task properties";
+    const LABEL_NAME = "Name";
     const LABEL_DESC = "Description";
     const LABEL_DATE = "Deadline";
     const LABEL_PRIORITY = "Priority";
@@ -225,7 +225,7 @@ export function generateNewTaskPopup() {
     addBtn.type = "submit";
     addBtn.id = "add_task_btn_form";
     addBtn.classList.add("btn-form");
-    addBtn.value = "Add";
+    addBtn.value = "Accept";
     form.appendChild(addBtn);
 
     const cancelBtn = document.createElement('button');

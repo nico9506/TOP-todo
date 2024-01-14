@@ -1,7 +1,7 @@
 /**
  * Collection of utilities as Constants, validations, functions and events
  */
-import { priorityValues, listArray, tasksArray, addNewTask, searchAndDeleteTask } from "./model";
+import { priorityValues, listArray, tasksArray, Task,  TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
 
@@ -185,5 +185,39 @@ function generateNewTaskElement(taskObject) {
     taskContainer.appendChild(deleteTask);
 
     return taskContainer;
+}
+
+export function searchAndDeleteTask() {
+    /**
+     * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
+     * If there's a coincidence, the array's element is deleted
+     */
+    const index = 0;
+
+    for (let i = 0; i < tasksArray.length; i++) {
+        if (Object.values(tasksArray[i]).includes(this.id)) {
+            index = i;
+        }
+    }
+
+    if (index > -1) tasksArray.splice(index, 1);
+    console.log("Deleted permanently: " + this.id);
+
+    refreshTasksView();
+}
+
+function addNewTask(
+    /**
+     * Creates a new Task object before adding it to the taskArray[]
+     */
+    name,
+    description = "",
+    dueDate = NO_DATE,
+    parentList = "General",
+    priority = priorityValues.MEDIUM
+) {
+    const newTask = new Task(name, description, dueDate, parentList, priority);
+    tasksArray.push(newTask);
+    console.log("New task added to array: " + newTask.id);
 }
 
