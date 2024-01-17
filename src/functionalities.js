@@ -1,11 +1,13 @@
 /**
  * Collection of utilities as Constants, validations, functions and events
  */
-import { priorityValues, listArray, tasksArray, Task,  TaskList } from "./model";
+import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
 
 export const NO_DATE = new Date(864000000000000);
+
+let lastID = ""; // ID of the last element edited
 
 export function addEvListeners() {
     /**
@@ -34,7 +36,10 @@ export function addEvListeners() {
 
     // Button in input-form (new task) to create and add a new task
     const addNewTaskBtn = document.getElementById("add_task_btn_form");
-    addNewTaskBtn.addEventListener("click", createTaskObjectFromPopupForm);
+    addNewTaskBtn.addEventListener(
+        "click",
+        createAndEditTaskObjectFromPopupForm
+    );
 }
 
 function toggleNewTaskPopup() {
@@ -91,7 +96,7 @@ export function uniqueID() {
 
 export function refreshTasksView() {
     /**
-     * Clears the user interface and loads the current tasks array to 
+     * Clears the user interface and loads the current tasks array to
      * display them
      */
 
@@ -103,14 +108,16 @@ export function refreshTasksView() {
     taskPanel.innerHTML = "";
 
     // Generates HTML elements from the actual tasks from the main array
-    tasksArray.forEach(task => {
+    tasksArray.forEach((task) => {
         taskPanel.appendChild(generateNewTaskElement(task));
     });
 }
 
-function createTaskObjectFromPopupForm() {
+function createAndEditTaskObjectFromPopupForm() {
     /**
-     * Creates a new Task using the form input fields of the NewTask popup
+     * If the Task ID does not exist, creates a new Task using the form input
+     * fields of the NewTask popup. Otherwise, replaces the value properties of the
+     * identified task
      */
 
     const taskNameForm = document.getElementById("new_task_input_name");
@@ -119,11 +126,42 @@ function createTaskObjectFromPopupForm() {
     const taskPriorityForm = document.getElementById("new_task_input_priority");
     // const taskNameForm = document.getElementById("new_task_input_parent");
 
-    addNewTask(taskNameForm.value, taskDescForm.value, taskDateForm.value, null, taskPriorityForm.value);
+    /**
+     * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
+     * If there's a coincidence, the element properties are overwritten.
+     */
+    let index = -Infinity;
 
-    refreshTasksView();
+    for (let i = 0; i < tasksArray.length; i++) {
+        if (tasksArray[i].id === lastID) {
+            index = i;
+        }
+    }
+
+    if (index > -1) {
+        const element = tasksArray[index];
+
+        element.name = taskNameForm.value;
+        element.desc = taskDescForm.value;
+        element.dueDate = taskDateForm.value;
+        element.priority = taskPriorityForm.value;
+
+        console.log("Edited: " + lastID);
+    } else {
+        addNewTask(
+            taskNameForm.value,
+            taskDescForm.value,
+            taskDateForm.value,
+            null,
+            taskPriorityForm.value
+        );
+    }
+
+    lastID = "";
 
     toggleNewTaskPopup();
+
+    refreshTasksView();
 }
 
 function generateNewTaskElement(taskObject) {
@@ -133,22 +171,22 @@ function generateNewTaskElement(taskObject) {
      * name, dueDate, parentList, desc, priority
      */
 
-    const taskContainer = document.createElement('div');
+    const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
 
     const taskName = document.createElement("h1");
     taskName.textContent = taskObject.name;
-    taskName.classList.add('task-name');
+    taskName.classList.add("task-name");
     taskContainer.appendChild(taskName);
 
-    const taskDateAndListContainer = document.createElement('div');
+    const taskDateAndListContainer = document.createElement("div");
     taskDateAndListContainer.classList.add("task-date-list-info");
-    
+
     const taskDate = document.createElement("h3");
     taskDate.classList.add("task-date");
     taskDate.textContent = taskObject.dueDate;
     taskDateAndListContainer.appendChild(taskDate);
-    
+
     const taskParentList = document.createElement("h3");
     taskParentList.classList.add("task-parent-list");
     taskParentList.textContent = taskObject.taskParentList;
@@ -158,7 +196,7 @@ function generateNewTaskElement(taskObject) {
     taskPriority.classList.add("task-priority");
     taskPriority.textContent = taskObject.parentList;
     taskDateAndListContainer.appendChild(taskPriority);
-    
+
     taskContainer.appendChild(taskDateAndListContainer);
 
     const taskDesc = document.createElement("p");
@@ -166,28 +204,30 @@ function generateNewTaskElement(taskObject) {
     taskDesc.textContent = taskObject.desc;
     taskContainer.appendChild(taskDesc);
 
-    const editTask = document.createElement('button');
-    editTask.classList.add('btn-edit-task');
+    const editTask = document.createElement("button");
+    editTask.classList.add("btn-edit-task");
     const editIcon = new Image();
     editIcon.src = pencilIcon;
     editIcon.classList.add("task-controls");
+    editIcon.setAttribute("editID", taskObject.id);
+    editIcon.addEventListener("click", searchTaskAndTogglePopup);
     editTask.appendChild(editIcon);
     taskContainer.appendChild(editTask);
 
-    const deleteTask = document.createElement('button');
-    deleteTask.classList.add('btn-delete-task');
+    const deleteTask = document.createElement("button");
+    deleteTask.classList.add("btn-delete-task");
     const deleteIcon = new Image();
     deleteIcon.src = trashIcon;
     deleteIcon.classList.add("task-controls");
     deleteIcon.id = taskObject.id;
-    deleteIcon.addEventListener('click', searchAndDeleteTask);
+    deleteIcon.addEventListener("click", searchAndDeleteTask);
     deleteTask.appendChild(deleteIcon);
     taskContainer.appendChild(deleteTask);
 
     return taskContainer;
 }
 
-export function searchAndDeleteTask() {
+function searchAndDeleteTask() {
     /**
      * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
      * If there's a coincidence, the array's element is deleted
@@ -201,9 +241,44 @@ export function searchAndDeleteTask() {
     }
 
     if (index > -1) tasksArray.splice(index, 1);
+
     console.log("Deleted permanently: " + this.id);
 
     refreshTasksView();
+}
+
+function searchTaskAndTogglePopup() {
+    let index = -Infinity;
+
+    lastID = this.getAttribute("editID");
+
+    for (let i = 0; i < tasksArray.length; i++) {
+        if (tasksArray[i].id === lastID) {
+            index = i;
+        }
+    }
+    
+    console.log(index);
+    if (index > -1) {
+        const element = tasksArray[index];
+
+        const taskNameForm = document.getElementById("new_task_input_name");
+        const taskDescForm = document.getElementById("new_task_input_desc");
+        const taskDateForm = document.getElementById("new_task_input_date");
+        const taskPriorityForm = document.getElementById(
+            "new_task_input_priority"
+        );
+        // const taskNameForm = document.getElementById("new_task_input_parent");
+
+        toggleNewTaskPopup();
+
+        taskNameForm.value = element.name;
+        taskDescForm.value = element.desc;
+        taskDateForm.value = element.dueDate;
+        taskPriorityForm.value = element.priority;
+
+        console.log("Popup refilled with: " + lastID);
+    }
 }
 
 function addNewTask(
@@ -220,4 +295,3 @@ function addNewTask(
     tasksArray.push(newTask);
     console.log("New task added to array: " + newTask.id);
 }
-
