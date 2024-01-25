@@ -235,6 +235,41 @@ nav {
     border: 2px solid var(--ct-numix);
 }
 
+.list-box {
+    display: grid;
+    grid-template: 1fr / 1fr var(--subheader-sm-fs) var(--subheader-sm-fs);
+}
+
+.btn-edit-list, .btn-delete-list {
+    background-color: var(--ct-light);
+    filter: var(--filter-light);
+    border: 0 none;
+    border-radius: 50%;
+    width: var(--subheader-sm-fs);
+    height: var(--subheader-sm-fs);
+    justify-self: center;
+    align-self: center;
+}
+
+.btn-edit-list {
+    margin-right: 3px;
+}
+
+.btn-edit-list:hover, .btn-delete-list:hover {
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.btn-edit-list:hover {
+    background-color: var(--ct-blue);
+    filter: unset;
+}
+
+.btn-delete-list:hover {
+    background-color: var(--ct-numix);
+    filter: unset;
+}
+
 /* --------------------- main panel -------------------- */
 .main-content {
     grid-area: main-content;
@@ -427,7 +462,7 @@ footer > .github-contact-info > .github-user:hover {
         --content-fs: 1rem;
 
         /* Elements height */
-        --side-panel-length: min(13rem, 40%);
+        --side-panel-length: min(14rem, 40%);
         --content-h: calc(100vh - var(--navbar-h) - var(--footer-h));
     }
 
