@@ -27,7 +27,7 @@ export class Task {
         taskName,
         taskDescription = "",
         dueDate = NO_DATE,
-        parentList = "general",
+        parentList = "General",
         priority = priorityValues.MEDIUM
     ) {
         this.#_taskName = taskName;
@@ -131,4 +131,4 @@ export const tasksArray = [];
 
 // Array to contain all created taskLists.
 // Contains the list 'General' by default. This list will be linked to the Home (side-panel menu)
-export const listArray = [new TaskList("General")];
+export const listArray = [new TaskList("General"), new TaskList("Test")];

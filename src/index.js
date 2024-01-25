@@ -13,6 +13,8 @@ import "./style.css";
 
     body.appendChild(AppInterface.generateSidePanel());
 
+    AppFunctionalities.refreshListView();
+
     body.appendChild(AppInterface.generateMainPanel());
 
     body.appendChild(AppInterface.generateFooter());

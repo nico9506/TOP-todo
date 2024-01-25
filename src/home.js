@@ -120,7 +120,7 @@ export function generateMainPanel() {
     mainPanel.appendChild(text);
 
     // Main container to organize multiple task containers
-    const taskSection = document.createElement('div');
+    const taskSection = document.createElement("div");
     taskSection.id = "task_panel";
     taskSection.classList.add("tasks-section");
 
@@ -131,7 +131,7 @@ export function generateMainPanel() {
 
 export function generateNewTaskPopup() {
     /**
-     * Generates the HTML element box containing the proper fields 
+     * Generates the HTML element box containing the proper fields
      * to create TASKS
      */
 
@@ -141,56 +141,55 @@ export function generateNewTaskPopup() {
     const LABEL_DATE = "Deadline";
     const LABEL_PRIORITY = "Priority";
 
-    const popupForm = document.createElement('div');
+    const popupForm = document.createElement("div");
     popupForm.id = "new_task_popup";
     popupForm.classList.add("popup-task");
 
-    const form = document.createElement('form');
-    form.classList.add('form-container');
-    form.action = "javascript:void(0);"
+    const form = document.createElement("form");
+    form.classList.add("form-container");
+    form.action = "javascript:void(0);";
 
-    const title = document.createElement('h1');
+    const title = document.createElement("h1");
     title.classList.add("popup-title");
     title.textContent = POPUP_TITLE;
     form.appendChild(title);
 
-
     // Name
-    const labelNewTaskName = document.createElement('label');
+    const labelNewTaskName = document.createElement("label");
     labelNewTaskName.setAttribute("for", "taskName");
     labelNewTaskName.textContent = LABEL_NAME;
     form.appendChild(labelNewTaskName);
 
-    const inputNewTaskName = document.createElement('input');
-    inputNewTaskName.type = 'text';
-    inputNewTaskName.id = 'new_task_input_name';
+    const inputNewTaskName = document.createElement("input");
+    inputNewTaskName.type = "text";
+    inputNewTaskName.id = "new_task_input_name";
     inputNewTaskName.placeholder = "New task name";
     inputNewTaskName.name = "taskName";
     inputNewTaskName.required;
     form.appendChild(inputNewTaskName);
 
     // Description
-    const labelNewTaskDesc = document.createElement('label');
+    const labelNewTaskDesc = document.createElement("label");
     labelNewTaskDesc.setAttribute("for", "taskDesc");
     labelNewTaskDesc.textContent = LABEL_DESC;
     form.appendChild(labelNewTaskDesc);
 
-    const inputNewTaskDesc = document.createElement('input');
-    inputNewTaskDesc.type = 'text';
-    inputNewTaskDesc.id = 'new_task_input_desc';
+    const inputNewTaskDesc = document.createElement("input");
+    inputNewTaskDesc.type = "text";
+    inputNewTaskDesc.id = "new_task_input_desc";
     inputNewTaskDesc.placeholder = "Task description";
     inputNewTaskDesc.name = "taskDesc";
     form.appendChild(inputNewTaskDesc);
 
     // Due date
-    const labelNewTaskDate = document.createElement('label');
+    const labelNewTaskDate = document.createElement("label");
     labelNewTaskDate.setAttribute("for", "taskDate");
     labelNewTaskDate.textContent = LABEL_DATE;
     form.appendChild(labelNewTaskDate);
 
-    const inputNewTaskDate = document.createElement('input');
-    inputNewTaskDate.type = 'date';
-    inputNewTaskDate.id = 'new_task_input_date';
+    const inputNewTaskDate = document.createElement("input");
+    inputNewTaskDate.type = "date";
+    inputNewTaskDate.id = "new_task_input_date";
     // inputNewTaskDate.placeholder = "Task description";
     inputNewTaskDate.name = "taskDate";
     form.appendChild(inputNewTaskDate);
@@ -209,26 +208,26 @@ export function generateNewTaskPopup() {
     // form.appendChild(inputNewTaskDate);
 
     // Priority
-    const labelNewTaskPriority = document.createElement('label');
+    const labelNewTaskPriority = document.createElement("label");
     labelNewTaskPriority.setAttribute("for", "taskPriority");
     labelNewTaskPriority.textContent = LABEL_PRIORITY;
     form.appendChild(labelNewTaskPriority);
 
-    const inputNewTaskPriority = document.createElement('input');
-    inputNewTaskPriority.type = 'text';
-    inputNewTaskPriority.id = 'new_task_input_priority';
+    const inputNewTaskPriority = document.createElement("input");
+    inputNewTaskPriority.type = "text";
+    inputNewTaskPriority.id = "new_task_input_priority";
     // inputNewTaskDate.placeholder = "Task description";
     inputNewTaskPriority.name = "taskPriority";
     form.appendChild(inputNewTaskPriority);
 
-    const addBtn = document.createElement('input');
+    const addBtn = document.createElement("input");
     addBtn.type = "submit";
     addBtn.id = "add_task_btn_form";
     addBtn.classList.add("btn-form");
     addBtn.value = "Accept";
     form.appendChild(addBtn);
 
-    const cancelBtn = document.createElement('button');
+    const cancelBtn = document.createElement("button");
     cancelBtn.type = "button";
     cancelBtn.id = "cancel_btn_task_form";
     cancelBtn.classList.add("btn-form", "cancel");
@@ -240,7 +239,7 @@ export function generateNewTaskPopup() {
     return popupForm;
 }
 
-function createSidePanelGroup(groupName, icon_path) {
+export function createSidePanelGroup(groupName, icon_path) {
     /**
      * Creates and returns the HTML element to use place in the side panel menu
      */
@@ -266,7 +265,7 @@ function createBtnIconLabel(label, icon_path) {
     /**
      * Returns a created button element containing an Icon and a text label
      */
-    
+
     // Add task button contains an Icon and a label
     const btn = document.createElement("button");
     btn.classList.add("btn-icon-label");
@@ -283,19 +282,19 @@ function createBtnIconLabel(label, icon_path) {
 function createNewListForm() {
     /**
      * Generates the fields to create a new list.
-     * Return the container with its elements. 
+     * Return the container with its elements.
      */
 
     const POPUP_TITLE = "Create a new list";
 
-    const popupForm = document.createElement('div');
+    const popupForm = document.createElement("div");
     popupForm.id = "new_list_input_form";
     popupForm.classList.add("popup");
 
-    const form = document.createElement('form');
-    form.classList.add('form-container');
+    const form = document.createElement("form");
+    form.classList.add("form-container");
 
-    const title = document.createElement('h1');
+    const title = document.createElement("h1");
     title.classList.add("popup-title");
     title.textContent = POPUP_TITLE;
     form.appendChild(title);
@@ -305,21 +304,21 @@ function createNewListForm() {
     // labelNewListName.textContent = "List name"
     // form.appendChild(labelNewListName);
 
-    const inputNewListName = document.createElement('input');
-    inputNewListName.type = 'text';
-    inputNewListName.id = 'new_list_input_field_text'
+    const inputNewListName = document.createElement("input");
+    inputNewListName.type = "text";
+    inputNewListName.id = "new_list_input_field_text";
     inputNewListName.placeholder = "New list name";
     inputNewListName.name = "listName";
     form.appendChild(inputNewListName);
 
-    const addBtn = document.createElement('button');
+    const addBtn = document.createElement("button");
     addBtn.type = "button";
     addBtn.id = "add_list_btn_form";
     addBtn.classList.add("btn-form");
     addBtn.textContent = "Add";
     form.appendChild(addBtn);
 
-    const cancelBtn = document.createElement('button');
+    const cancelBtn = document.createElement("button");
     cancelBtn.type = "button";
     cancelBtn.id = "cancel_btn_form";
     cancelBtn.classList.add("btn-form");

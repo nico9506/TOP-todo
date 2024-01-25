@@ -4,6 +4,8 @@
 import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
+import { createSidePanelGroup } from "./home";
+import anytimeIcon from "./assets/stack.svg";
 
 export const NO_DATE = new Date(864000000000000);
 
@@ -40,6 +42,10 @@ export function addEvListeners() {
         "click",
         createAndEditTaskObjectFromPopupForm
     );
+
+    // Button in thw NewList form which "add" a new list
+    const addNewListBtn = document.getElementById("add_list_btn_form");
+    addNewListBtn.addEventListener("click", addNewList);
 }
 
 function toggleNewTaskPopup() {
@@ -84,7 +90,20 @@ function toggleNewListForm() {
 function addNewList() {
     /**
      * Generates a new list and append the list element to the sidePanel menu
+     * 
+     * The input value (list name) is validated to avoid duplicates
      */
+
+    const newListName = document.getElementById("new_list_input_field_text");
+
+    for (let i = 0; i < listArray.length; i++) {
+        if (listArray[i].name == newListName.value) {
+            console.log("Error: TaskList (name) already created.");
+            return;
+        }
+    }
+
+    listArray.push(new TaskList(newListName));
 }
 
 export function uniqueID() {
@@ -248,6 +267,10 @@ function searchAndDeleteTask() {
 }
 
 function searchTaskAndTogglePopup() {
+    /**
+     * Search for the actual task and fill up the popup form.
+     * The task attributes are replaced with the final form values.
+     */
     let index = -Infinity;
 
     lastID = this.getAttribute("editID");
@@ -294,4 +317,30 @@ function addNewTask(
     const newTask = new Task(name, description, dueDate, parentList, priority);
     tasksArray.push(newTask);
     console.log("New task added to array: " + newTask.id);
+}
+
+
+export function refreshListView() {
+    /**
+     * Deletes and creates the task list in the side panel using the listArray
+     */
+    try {
+        document.getElementById("sidePanel-lists").remove;
+    } catch (error) {
+        console.log("element ID: sidePanel-lists DOES NOT EXIST");
+    }
+
+    const sidePanel = document.getElementById("sidePanel");
+    
+    const sidePanelLists = document.createElement("div");
+    sidePanelLists.classList.add("side-panel");
+    sidePanelLists.id = "sidePanel-lists";
+
+    listArray.forEach((list) => {
+        sidePanelLists.appendChild(
+            createSidePanelGroup(list.name, anytimeIcon)
+        );
+    });
+
+    sidePanel.appendChild(sidePanelLists);
 }
