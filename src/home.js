@@ -10,6 +10,8 @@ import todayIcon from "./assets/today.svg";
 import calendarIcon from "./assets/calendar.svg";
 import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
+import pencilIcon from "./assets/edit.svg";
+import trashIcon from "./assets/trash.svg";
 
 export function generateNavigationBar() {
     /**
@@ -259,6 +261,52 @@ export function createSidePanelGroup(groupName, icon_path) {
     group.appendChild(label);
 
     return group;
+}
+
+export function createSidePanelList(listObject) {
+    /**
+     * Creates and returns the HTML element to use place in the side panel menu
+     */
+    const container = document.createElement("div");
+    container.classList.add("list-box");
+
+    const group = document.createElement("div");
+    group.id = "sp_g_" + listObject.name;
+    group.classList.add("sp-group");
+
+    const icon = new Image();
+    icon.src = anytimeIcon;
+    icon.classList.add("sp-g-icon");
+    group.appendChild(icon);
+
+    const label = document.createElement("h3");
+    label.classList.add("sp-g-label");
+    label.textContent = listObject.name;
+    group.appendChild(label);
+
+    container.appendChild(group);
+
+    const editList = document.createElement("button");
+    editList.classList.add("btn-edit-list");
+    const editIcon = new Image();
+    editIcon.src = pencilIcon;
+    editIcon.classList.add("list-controls");
+    editIcon.setAttribute("editID", listObject.id);
+    // editIcon.addEventListener("click", searchTaskAndTogglePopup);
+    editList.appendChild(editIcon);
+    container.appendChild(editList);
+
+    const deleteList = document.createElement("button");
+    deleteList.classList.add("btn-delete-list");
+    const deleteIcon = new Image();
+    deleteIcon.src = trashIcon;
+    deleteIcon.classList.add("list-controls");
+    deleteIcon.id = listObject.id;
+    // deleteIcon.addEventListener("click", searchAndDeleteTask);
+    deleteList.appendChild(deleteIcon);
+    container.appendChild(deleteList);
+
+    return container;
 }
 
 function createBtnIconLabel(label, icon_path) {

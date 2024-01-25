@@ -4,7 +4,7 @@
 import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
-import { createSidePanelGroup } from "./home";
+import { createSidePanelGroup, createSidePanelList } from "./home";
 import anytimeIcon from "./assets/stack.svg";
 
 export const NO_DATE = new Date(864000000000000);
@@ -334,17 +334,14 @@ export function refreshListView() {
         console.log("element ID: sidePanel-lists DOES NOT EXIST");
     }
 
-    const sidePanel = document.getElementById("sidePanel");
-
     const sidePanelLists = document.createElement("div");
-    sidePanelLists.classList.add("side-panel");
     sidePanelLists.id = "sidePanel-lists";
 
     listArray.forEach((list) => {
         sidePanelLists.appendChild(
-            createSidePanelGroup(list.name, anytimeIcon)
+            createSidePanelList(list)
         );
     });
 
-    sidePanel.appendChild(sidePanelLists);
+    document.getElementById("sidePanel").appendChild(sidePanelLists);
 }
