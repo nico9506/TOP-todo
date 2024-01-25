@@ -90,20 +90,25 @@ function toggleNewListForm() {
 function addNewList() {
     /**
      * Generates a new list and append the list element to the sidePanel menu
-     * 
+     *
      * The input value (list name) is validated to avoid duplicates
      */
 
-    const newListName = document.getElementById("new_list_input_field_text");
+    const newListName = document.getElementById(
+        "new_list_input_field_text"
+    ).value;
 
     for (let i = 0; i < listArray.length; i++) {
-        if (listArray[i].name == newListName.value) {
+        if (listArray[i].name === newListName) {
             console.log("Error: TaskList (name) already created.");
             return;
         }
     }
 
     listArray.push(new TaskList(newListName));
+
+    toggleNewListForm();
+    refreshListView();
 }
 
 export function uniqueID() {
@@ -280,7 +285,7 @@ function searchTaskAndTogglePopup() {
             index = i;
         }
     }
-    
+
     console.log(index);
     if (index > -1) {
         const element = tasksArray[index];
@@ -319,19 +324,18 @@ function addNewTask(
     console.log("New task added to array: " + newTask.id);
 }
 
-
 export function refreshListView() {
     /**
      * Deletes and creates the task list in the side panel using the listArray
      */
     try {
-        document.getElementById("sidePanel-lists").remove;
+        document.getElementById("sidePanel-lists").remove();
     } catch (error) {
         console.log("element ID: sidePanel-lists DOES NOT EXIST");
     }
 
     const sidePanel = document.getElementById("sidePanel");
-    
+
     const sidePanelLists = document.createElement("div");
     sidePanelLists.classList.add("side-panel");
     sidePanelLists.id = "sidePanel-lists";
