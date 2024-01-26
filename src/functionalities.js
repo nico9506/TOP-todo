@@ -98,15 +98,27 @@ function addNewList() {
         "new_list_input_field_text"
     ).value;
 
+    let index = -Infinity;
+
     for (let i = 0; i < listArray.length; i++) {
         if (listArray[i].name === newListName) {
             console.log("Error: TaskList (name) already created.");
             alert("Name list currently in use!");
             return;
         }
+
+        if (listArray[i].id == lastListID) {
+            index = i;
+        }
     }
 
-    listArray.push(new TaskList(newListName));
+    if (index > -1) {
+        listArray[index].name = newListName;
+    } else {
+        listArray.push(new TaskList(newListName));
+    }
+
+    lastListID = "";
 
     toggleNewListForm();
     refreshListView();
