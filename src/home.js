@@ -12,6 +12,7 @@ import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
+import { searchListAndTogglePopup } from "./functionalities";
 
 export function generateNavigationBar() {
     /**
@@ -292,7 +293,7 @@ export function createSidePanelList(listObject) {
     editIcon.src = pencilIcon;
     editIcon.classList.add("list-controls");
     editIcon.setAttribute("editID", listObject.id);
-    // editIcon.addEventListener("click", searchTaskAndTogglePopup);
+    editIcon.addEventListener("click", searchListAndTogglePopup);
     editList.appendChild(editIcon);
     container.appendChild(editList);
 
@@ -333,7 +334,7 @@ function createNewListForm() {
      * Return the container with its elements.
      */
 
-    const POPUP_TITLE = "Create a new list";
+    const POPUP_TITLE = "List properties";
 
     const popupForm = document.createElement("div");
     popupForm.id = "new_list_input_form";
@@ -355,7 +356,7 @@ function createNewListForm() {
     const inputNewListName = document.createElement("input");
     inputNewListName.type = "text";
     inputNewListName.id = "new_list_input_field_text";
-    inputNewListName.placeholder = "New list name";
+    inputNewListName.placeholder = "List name";
     inputNewListName.name = "listName";
     form.appendChild(inputNewListName);
 
@@ -363,7 +364,7 @@ function createNewListForm() {
     addBtn.type = "button";
     addBtn.id = "add_list_btn_form";
     addBtn.classList.add("btn-form");
-    addBtn.textContent = "Add";
+    addBtn.textContent = "Accept";
     form.appendChild(addBtn);
 
     const cancelBtn = document.createElement("button");

@@ -4,12 +4,12 @@
 import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
-import { createSidePanelGroup, createSidePanelList } from "./home";
-import anytimeIcon from "./assets/stack.svg";
+import { createSidePanelList } from "./home";
 
 export const NO_DATE = new Date(864000000000000);
 
 let lastID = ""; // ID of the last element edited
+let lastListID = ""; // ID of the last list element edited
 
 export function addEvListeners() {
     /**
@@ -101,6 +101,7 @@ function addNewList() {
     for (let i = 0; i < listArray.length; i++) {
         if (listArray[i].name === newListName) {
             console.log("Error: TaskList (name) already created.");
+            alert("Name list currently in use!");
             return;
         }
     }
@@ -338,10 +339,45 @@ export function refreshListView() {
     sidePanelLists.id = "sidePanel-lists";
 
     listArray.forEach((list) => {
-        sidePanelLists.appendChild(
-            createSidePanelList(list)
-        );
+        sidePanelLists.appendChild(createSidePanelList(list));
     });
 
     document.getElementById("sidePanel").appendChild(sidePanelLists);
+}
+
+export function searchListAndTogglePopup() {
+    /**
+     * Search for the actual List and fill up the popup form.
+     * The list attributes are replaced with the final form values.
+     */
+    let index = -Infinity;
+
+    lastListID = this.getAttribute("editID");
+
+    for (let i = 0; i < listArray.length; i++) {
+        if (listArray[i].id === lastListID) {
+            index = i;
+        }
+    }
+
+    console.log(index);
+
+    if (index > -1) {
+        const element = listArray[index];
+
+        const listNameForm = document.getElementById(
+            "new_list_input_field_text"
+        );
+
+        // To avoid closing de form after clicking other list edit button when the popup is unhidden 
+        document
+            .getElementById("new_list_input_form")
+            .classList.remove("popup-unhidden");
+
+        toggleNewListForm();
+
+        listNameForm.value = element.name;
+
+        console.log("Popup refilled with: " + lastID);
+    }
 }
