@@ -12,7 +12,7 @@ import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
-import { searchListAndTogglePopup } from "./functionalities";
+import { searchAndDeleteList, searchListAndTogglePopup } from "./functionalities";
 
 export function generateNavigationBar() {
     /**
@@ -303,7 +303,7 @@ export function createSidePanelList(listObject) {
     deleteIcon.src = trashIcon;
     deleteIcon.classList.add("list-controls");
     deleteIcon.id = listObject.id;
-    // deleteIcon.addEventListener("click", searchAndDeleteTask);
+    deleteIcon.addEventListener("click", searchAndDeleteList);
     deleteList.appendChild(deleteIcon);
     container.appendChild(deleteList);
 

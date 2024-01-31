@@ -43,7 +43,7 @@ export function addEvListeners() {
         createAndEditTaskObjectFromPopupForm
     );
 
-    // Button in thw NewList form which "add" a new list
+    // Button in thw NewList form which add a new list
     const addNewListBtn = document.getElementById("add_list_btn_form");
     addNewListBtn.addEventListener("click", addNewList);
 }
@@ -355,6 +355,29 @@ export function refreshListView() {
     });
 
     document.getElementById("sidePanel").appendChild(sidePanelLists);
+}
+
+export function searchAndDeleteList() {
+    /**
+     * Search for the List with same ID as the button which was clicked (same List Object ID)
+     * If there's a coincidence, the array's element is deleted
+     */
+    const index = 0;
+
+    for (let i = 0; i < listArray.length; i++) {
+        if (listArray[i].id == this.id) {
+            // index = i;
+            listArray.splice(i, 1);
+            console.log("Deleted permanently: " + this.id);
+            break;
+        }
+    }
+
+    // if (index > -1) listArray.splice(index + 1, 1);
+
+
+    refreshListView();
+    console.log(listArray);
 }
 
 export function searchListAndTogglePopup() {
