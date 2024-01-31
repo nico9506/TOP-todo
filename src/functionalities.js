@@ -269,17 +269,13 @@ function searchAndDeleteTask() {
      * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
      * If there's a coincidence, the array's element is deleted
      */
-    const index = 0;
-
     for (let i = 0; i < tasksArray.length; i++) {
-        if (Object.values(tasksArray[i]).includes(this.id)) {
-            index = i;
+        if (tasksArray[i].id == this.id) {
+            tasksArray.splice(i, 1);
+            console.log("Deleted permanently: " + this.id);
+            break;
         }
     }
-
-    if (index > -1) tasksArray.splice(index, 1);
-
-    console.log("Deleted permanently: " + this.id);
 
     refreshTasksView();
 }
@@ -362,22 +358,16 @@ export function searchAndDeleteList() {
      * Search for the List with same ID as the button which was clicked (same List Object ID)
      * If there's a coincidence, the array's element is deleted
      */
-    const index = 0;
 
     for (let i = 0; i < listArray.length; i++) {
         if (listArray[i].id == this.id) {
-            // index = i;
             listArray.splice(i, 1);
             console.log("Deleted permanently: " + this.id);
             break;
         }
     }
 
-    // if (index > -1) listArray.splice(index + 1, 1);
-
-
     refreshListView();
-    console.log(listArray);
 }
 
 export function searchListAndTogglePopup() {
