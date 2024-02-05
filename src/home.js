@@ -13,6 +13,7 @@ import newListIcon from "./assets/folder-plus.svg";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
 import { searchAndDeleteList, searchListAndTogglePopup } from "./functionalities";
+import { priorityValues } from "./model";
 
 export function generateNavigationBar() {
     /**
@@ -143,6 +144,7 @@ export function generateNewTaskPopup() {
     const LABEL_DESC = "Description";
     const LABEL_DATE = "Deadline";
     const LABEL_PRIORITY = "Priority";
+    const LABEL_PARENT_LIST = "Project";
 
     const popupForm = document.createElement("div");
     popupForm.id = "new_task_popup";
@@ -198,17 +200,31 @@ export function generateNewTaskPopup() {
     form.appendChild(inputNewTaskDate);
 
     // Parent list
-    // const labelNewTaskDate = document.createElement('label');
-    // labelNewTaskDate.setAttribute("for", "taskDate");
-    // labelNewTaskDate.textContent = "Deadline"
-    // form.appendChild(labelNewTaskDate);
+    const labelNewTaskList = document.createElement('label');
+    labelNewTaskList.setAttribute("for", "new_task_input_list");
+    labelNewTaskList.textContent = LABEL_PARENT_LIST;
+    form.appendChild(labelNewTaskList);
 
-    // const inputNewTaskDate = document.createElement('input');
-    // inputNewTaskDate.type = 'date';
-    // inputNewTaskDate.id = 'new_task_input_date';
-    // inputNewTaskDate.placeholder = "Task description";
-    // inputNewTaskDate.name = "taskDate";
-    // form.appendChild(inputNewTaskDate);
+    const inputNewTaskList = document.createElement('select');
+    inputNewTaskList.id = 'new_task_input_list';
+    inputNewTaskList.name = "new_task_input_list";
+
+    const inputPriorityValueLow = document.createElement("option");
+    inputPriorityValueLow.value = priorityValues.LOW;
+    inputPriorityValueLow.innerText = "Low";
+    inputNewTaskList.appendChild(inputPriorityValueLow);
+
+    const inputPriorityValueMed = document.createElement("option");
+    inputPriorityValueMed.value = priorityValues.MEDIUM;
+    inputPriorityValueMed.innerText = "Medium";
+    inputNewTaskList.appendChild(inputPriorityValueMed);
+
+    const inputPriorityValueHigh = document.createElement("option");
+    inputPriorityValueHigh.value = priorityValues.HIGH;
+    inputPriorityValueHigh.innerText = "High";
+    inputNewTaskList.appendChild(inputPriorityValueHigh);
+
+    form.appendChild(inputNewTaskList);
 
     // Priority
     const labelNewTaskPriority = document.createElement("label");
