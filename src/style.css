@@ -214,7 +214,7 @@ nav {
     gap: 0.5rem;
 }
 
-.form-container > input {
+.form-container > input, .form-container > select {
     width: 100%;
     font-size: var(--content-fs);
 }

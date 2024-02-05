@@ -200,10 +200,10 @@ export function generateNewTaskPopup() {
     form.appendChild(inputNewTaskDate);
 
     // Parent list
-    const labelNewTaskList = document.createElement('label');
-    labelNewTaskList.setAttribute("for", "new_task_input_list");
-    labelNewTaskList.textContent = LABEL_PARENT_LIST;
-    form.appendChild(labelNewTaskList);
+    const labelNewTaskPriority = document.createElement('label');
+    labelNewTaskPriority.setAttribute("for", "new_task_input_list");
+    labelNewTaskPriority.textContent = LABEL_PRIORITY;
+    form.appendChild(labelNewTaskPriority);
 
     const inputNewTaskList = document.createElement('select');
     inputNewTaskList.id = 'new_task_input_list';
@@ -227,10 +227,10 @@ export function generateNewTaskPopup() {
     form.appendChild(inputNewTaskList);
 
     // Priority
-    const labelNewTaskPriority = document.createElement("label");
-    labelNewTaskPriority.setAttribute("for", "taskPriority");
-    labelNewTaskPriority.textContent = LABEL_PRIORITY;
-    form.appendChild(labelNewTaskPriority);
+    const labelNewTaskParentList = document.createElement("label");
+    labelNewTaskParentList.setAttribute("for", "taskPriority");
+    labelNewTaskParentList.textContent = LABEL_PARENT_LIST;
+    form.appendChild(labelNewTaskParentList);
 
     const inputNewTaskPriority = document.createElement("input");
     inputNewTaskPriority.type = "text";
