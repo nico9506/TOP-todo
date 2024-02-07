@@ -161,7 +161,9 @@ function createAndEditTaskObjectFromPopupForm() {
     const taskDescForm = document.getElementById("new_task_input_desc");
     const taskDateForm = document.getElementById("new_task_input_date");
     const taskPriorityForm = document.getElementById("new_task_input_priority");
-    const taskProjectForm = document.getElementById("new_task_input_project");
+    const taskProjectForm = document.getElementById(
+        "new_task_input_parent_list"
+    );
 
     /**
      * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
@@ -210,7 +212,7 @@ function generateNewTaskElement(taskObject) {
 
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
-    
+
     console.log("taskObject.priority: " + taskObject.priority);
 
     switch (parseInt(taskObject.priority)) {
@@ -221,7 +223,7 @@ function generateNewTaskElement(taskObject) {
         case 0:
             taskContainer.classList.add("task-priority-medium");
             break;
-    
+
         case 1:
             taskContainer.classList.add("task-priority-high");
             break;
@@ -413,7 +415,7 @@ export function searchListAndTogglePopup() {
             "new_list_input_field_text"
         );
 
-        // To avoid closing de form after clicking other list edit button when the popup is unhidden 
+        // To avoid closing de form after clicking other list edit button when the popup is unhidden
         document
             .getElementById("new_list_input_form")
             .classList.remove("popup-unhidden");
@@ -424,4 +426,15 @@ export function searchListAndTogglePopup() {
 
         console.log("Popup refilled with: " + lastID);
     }
+}
+
+export function generateOptionFromList(list) {
+    /**
+     * Used to create an option from an actual list to be appended in a Select element
+     */
+    const option = document.createElement("option");
+    option.value = list.name;
+    option.innerText = list.name;
+
+    return option;
 }

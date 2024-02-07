@@ -12,8 +12,12 @@ import anytimeIcon from "./assets/stack.svg";
 import newListIcon from "./assets/folder-plus.svg";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
-import { searchAndDeleteList, searchListAndTogglePopup } from "./functionalities";
-import { priorityValues } from "./model";
+import {
+    generateOptionFromList,
+    searchAndDeleteList,
+    searchListAndTogglePopup,
+} from "./functionalities";
+import { listArray, priorityValues } from "./model";
 
 export function generateNavigationBar() {
     /**
@@ -200,13 +204,13 @@ export function generateNewTaskPopup() {
     form.appendChild(inputNewTaskDate);
 
     // Priority
-    const labelNewTaskPriority = document.createElement('label');
+    const labelNewTaskPriority = document.createElement("label");
     labelNewTaskPriority.setAttribute("for", "new_task_input_priority");
     labelNewTaskPriority.textContent = LABEL_PRIORITY;
     form.appendChild(labelNewTaskPriority);
 
-    const inputNewTaskList = document.createElement('select');
-    inputNewTaskList.id = 'new_task_input_priority';
+    const inputNewTaskList = document.createElement("select");
+    inputNewTaskList.id = "new_task_input_priority";
     inputNewTaskList.name = "new_task_input_priority";
 
     const inputPriorityValueLow = document.createElement("option");
@@ -228,15 +232,18 @@ export function generateNewTaskPopup() {
 
     // Parent list / Project
     const labelNewTaskParentList = document.createElement("label");
-    labelNewTaskParentList.setAttribute("for", "taskParentList");
+    labelNewTaskParentList.setAttribute("for", "new_task_input_parent_list");
     labelNewTaskParentList.textContent = LABEL_PARENT_LIST;
     form.appendChild(labelNewTaskParentList);
 
-    const inputNewTaskPriority = document.createElement("input");
-    inputNewTaskPriority.type = "text";
-    inputNewTaskPriority.id = "new_task_input_project";
-    // inputNewTaskDate.placeholder = "Task description";
-    inputNewTaskPriority.name = "taskParentList";
+    const inputNewTaskPriority = document.createElement("select");
+    inputNewTaskPriority.id = "new_task_input_parent_list";
+    inputNewTaskPriority.name = "new_task_input_parent_list";
+
+    listArray.forEach((list) => {
+        inputNewTaskPriority.appendChild(generateOptionFromList(list));
+    });
+
     form.appendChild(inputNewTaskPriority);
 
     const addBtn = document.createElement("input");
