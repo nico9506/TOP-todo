@@ -199,15 +199,15 @@ export function generateNewTaskPopup() {
     inputNewTaskDate.name = "taskDate";
     form.appendChild(inputNewTaskDate);
 
-    // Parent list
+    // Priority
     const labelNewTaskPriority = document.createElement('label');
-    labelNewTaskPriority.setAttribute("for", "new_task_input_list");
+    labelNewTaskPriority.setAttribute("for", "new_task_input_priority");
     labelNewTaskPriority.textContent = LABEL_PRIORITY;
     form.appendChild(labelNewTaskPriority);
 
     const inputNewTaskList = document.createElement('select');
-    inputNewTaskList.id = 'new_task_input_list';
-    inputNewTaskList.name = "new_task_input_list";
+    inputNewTaskList.id = 'new_task_input_priority';
+    inputNewTaskList.name = "new_task_input_priority";
 
     const inputPriorityValueLow = document.createElement("option");
     inputPriorityValueLow.value = priorityValues.LOW;
@@ -226,17 +226,17 @@ export function generateNewTaskPopup() {
 
     form.appendChild(inputNewTaskList);
 
-    // Priority
+    // Parent list / Project
     const labelNewTaskParentList = document.createElement("label");
-    labelNewTaskParentList.setAttribute("for", "taskPriority");
+    labelNewTaskParentList.setAttribute("for", "taskParentList");
     labelNewTaskParentList.textContent = LABEL_PARENT_LIST;
     form.appendChild(labelNewTaskParentList);
 
     const inputNewTaskPriority = document.createElement("input");
     inputNewTaskPriority.type = "text";
-    inputNewTaskPriority.id = "new_task_input_priority";
+    inputNewTaskPriority.id = "new_task_input_project";
     // inputNewTaskDate.placeholder = "Task description";
-    inputNewTaskPriority.name = "taskPriority";
+    inputNewTaskPriority.name = "taskParentList";
     form.appendChild(inputNewTaskPriority);
 
     const addBtn = document.createElement("input");

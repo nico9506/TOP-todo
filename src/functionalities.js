@@ -161,7 +161,7 @@ function createAndEditTaskObjectFromPopupForm() {
     const taskDescForm = document.getElementById("new_task_input_desc");
     const taskDateForm = document.getElementById("new_task_input_date");
     const taskPriorityForm = document.getElementById("new_task_input_priority");
-    // const taskNameForm = document.getElementById("new_task_input_parent");
+    const taskProjectForm = document.getElementById("new_task_input_project");
 
     /**
      * Search for the Task with same ID as the button was clicked (which is the same TaskObject ID)
@@ -189,7 +189,7 @@ function createAndEditTaskObjectFromPopupForm() {
             taskNameForm.value,
             taskDescForm.value,
             taskDateForm.value,
-            null,
+            taskProjectForm.value,
             taskPriorityForm.value
         );
     }
@@ -210,6 +210,25 @@ function generateNewTaskElement(taskObject) {
 
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
+    
+    console.log("taskObject.priority: " + taskObject.priority);
+
+    switch (parseInt(taskObject.priority)) {
+        case -1:
+            taskContainer.classList.add("task-priority-low");
+            break;
+
+        case 0:
+            taskContainer.classList.add("task-priority-medium");
+            break;
+    
+        case 1:
+            taskContainer.classList.add("task-priority-high");
+            break;
+
+        default:
+            break;
+    }
 
     const taskName = document.createElement("h1");
     taskName.textContent = taskObject.name;

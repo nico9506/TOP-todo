@@ -391,6 +391,20 @@ nav {
     width: var(--subheader-fs)
 }
 
+.task-priority-low {
+    border-color: var(--ct-white);
+    box-shadow: inset 0 0 10px 0 var(--ct-white);
+}
+
+.task-priority-medium {
+    border-color: var(--ct-blue);
+    box-shadow: inset 0 0 10px 0 var(--ct-blue);
+}
+
+.task-priority-high {
+    border-color: var(--ct-numix);
+    box-shadow: inset 0 0 10px 0 var(--ct-numix);
+}
 /* --------------------- Footer -------------------- */
 footer {
     grid-area: footer;
