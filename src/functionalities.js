@@ -71,6 +71,9 @@ function toggleNewTaskPopup() {
         "new_task_input_parent_list"
     );
     inputParentList.value = "";
+
+    // Clean the variable in case the popup has been opened from the edit button
+    lastID = "";
 }
 
 function toggleSidePanel() {
