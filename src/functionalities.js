@@ -4,7 +4,7 @@
 import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
-import { createSidePanelList } from "./home";
+import { createSidePanelList, generateNewTaskPopup } from "./home";
 
 export const NO_DATE = new Date(864000000000000);
 
@@ -66,6 +66,11 @@ function toggleNewTaskPopup() {
 
     const inputPriority = document.getElementById("new_task_input_priority");
     inputPriority.value = "";
+
+    const inputParentList = document.getElementById(
+        "new_task_input_parent_list"
+    );
+    inputParentList.value = "";
 }
 
 function toggleSidePanel() {
@@ -122,6 +127,7 @@ function addNewList() {
 
     toggleNewListForm();
     refreshListView();
+    refreshTasksView();
 }
 
 export function uniqueID() {
@@ -171,6 +177,8 @@ function createAndEditTaskObjectFromPopupForm() {
      */
     let index = -Infinity;
 
+    let parentListID = "";
+
     for (let i = 0; i < tasksArray.length; i++) {
         if (tasksArray[i].id === lastID) {
             index = i;
@@ -180,18 +188,29 @@ function createAndEditTaskObjectFromPopupForm() {
     if (index > -1) {
         const element = tasksArray[index];
 
+        for (let i = 0; i < listArray.length; i++) {
+            if (listArray[i].name == taskProjectForm.value)
+                parentListID = listArray[i].id;
+        }
+
         element.name = taskNameForm.value;
         element.desc = taskDescForm.value;
         element.dueDate = taskDateForm.value;
         element.priority = taskPriorityForm.value;
+        element.parentList = parentListID;
 
         console.log("Edited: " + lastID);
     } else {
+        for (let i = 0; i < listArray.length; i++) {
+            if (listArray[i].name == taskProjectForm.value)
+                parentListID = listArray[i].id;
+        }
+
         addNewTask(
             taskNameForm.value,
             taskDescForm.value,
             taskDateForm.value,
-            taskProjectForm.value,
+            parentListID,
             taskPriorityForm.value
         );
     }
@@ -245,15 +264,21 @@ function generateNewTaskElement(taskObject) {
     taskDate.textContent = taskObject.dueDate;
     taskDateAndListContainer.appendChild(taskDate);
 
+    // To update parent list in task attributes when this is modified
     const taskParentList = document.createElement("h3");
     taskParentList.classList.add("task-parent-list");
-    taskParentList.textContent = taskObject.taskParentList;
+
+    for (let i = 0; i < listArray.length; i++) {
+        if (listArray[i].id == taskObject.parentList)
+            taskParentList.textContent = listArray[i].name;
+    }
+
     taskDateAndListContainer.appendChild(taskParentList);
 
-    const taskPriority = document.createElement("h3");
-    taskPriority.classList.add("task-priority");
-    taskPriority.textContent = taskObject.parentList;
-    taskDateAndListContainer.appendChild(taskPriority);
+    // const taskPriority = document.createElement("h3");
+    // taskPriority.classList.add("task-priority");
+    // taskPriority.textContent = taskObject.priority;
+    // taskDateAndListContainer.appendChild(taskPriority);
 
     taskContainer.appendChild(taskDateAndListContainer);
 
@@ -316,7 +341,6 @@ function searchTaskAndTogglePopup() {
         }
     }
 
-    console.log(index);
     if (index > -1) {
         const element = tasksArray[index];
 
@@ -326,7 +350,16 @@ function searchTaskAndTogglePopup() {
         const taskPriorityForm = document.getElementById(
             "new_task_input_priority"
         );
-        // const taskNameForm = document.getElementById("new_task_input_parent");
+        const taskParentList = document.getElementById(
+            "new_task_input_parent_list"
+        );
+
+        let parentListName = "";
+
+        for (let i = 0; i < listArray.length; i++) {
+            if (listArray[i].id == element.parentList)
+                parentListName = listArray[i].name;
+        }
 
         toggleNewTaskPopup();
 
@@ -334,6 +367,9 @@ function searchTaskAndTogglePopup() {
         taskDescForm.value = element.desc;
         taskDateForm.value = element.dueDate;
         taskPriorityForm.value = element.priority;
+        taskParentList.value = parentListName;
+
+        console.log("element.parentList: " + element.parentList);
 
         console.log("Popup refilled with: " + lastID);
     }
@@ -372,6 +408,28 @@ export function refreshListView() {
     });
 
     document.getElementById("sidePanel").appendChild(sidePanelLists);
+
+    // Deletes and creates the popup to refresh the Select element values (parentList)
+    try {
+        document.getElementById("new_task_popup").remove();
+
+        document.body.appendChild(generateNewTaskPopup());
+
+        // Button in input-form (new task) to cancel (close) the New-task form
+        const cancelNewTaskForm = document.getElementById(
+            "cancel_btn_task_form"
+        );
+        cancelNewTaskForm.addEventListener("click", toggleNewTaskPopup);
+
+        // Button in input-form (new task) to create and add a new task
+        const addNewTaskBtn = document.getElementById("add_task_btn_form");
+        addNewTaskBtn.addEventListener(
+            "click",
+            createAndEditTaskObjectFromPopupForm
+        );
+    } catch (error) {
+        console.log("element ID: new_task_popup DOES NOT EXIST");
+    }
 }
 
 export function searchAndDeleteList() {
