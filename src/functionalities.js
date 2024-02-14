@@ -55,6 +55,65 @@ export function addEvListeners() {
     // Button in thw NewList form which add a new list
     const addNewListBtn = document.getElementById("add_list_btn_form");
     addNewListBtn.addEventListener("click", addNewList);
+
+    // Button Home in sidePanel
+    const home = document.getElementById("sp_g_home");
+    home.addEventListener("click", cleanTasksFilters);
+
+    // Button Home in sidePanel
+    const today = document.getElementById("sp_g_today");
+    today.addEventListener("click", todaysTasksFilter);
+
+    // Button Home in sidePanel
+    const upcoming = document.getElementById("sp_g_upcoming");
+    upcoming.addEventListener("click", upcomingTasksFilter);
+
+    // Button Home in sidePanel
+    const anytime = document.getElementById("sp_g_anytime");
+    anytime.addEventListener("click", anytimeTasksFilter);
+}
+
+function cleanTasksFilters() {
+    document.getElementById("parent_list_name_main_panel").textContent = "Home";
+
+    tasksDateFilter = "anytime";
+
+    tasksProjectFilter = "";
+
+    refreshTasksView();
+}
+
+function todaysTasksFilter() {
+    document.getElementById("parent_list_name_main_panel").textContent =
+        "Today";
+
+    tasksDateFilter = "today";
+
+    // tasksProjectFilter = "";
+
+    refreshTasksView();
+}
+
+function upcomingTasksFilter() {
+    document.getElementById("parent_list_name_main_panel").textContent =
+        "Upcoming";
+
+    tasksDateFilter = "upcoming";
+
+    // tasksProjectFilter = "";
+
+    refreshTasksView();
+}
+
+function anytimeTasksFilter() {
+    document.getElementById("parent_list_name_main_panel").textContent =
+        "Anytime";
+
+    tasksDateFilter = "anytime";
+
+    // tasksProjectFilter = "";
+
+    refreshTasksView();
 }
 
 function toggleNewTaskPopup() {
@@ -177,7 +236,9 @@ export function refreshTasksView() {
         case "upcoming":
             filteredTasksArray = tasksArray.filter(
                 (task) =>
-                    differenceInDays(toDate(task.dueDate), startOfToday()) < 7
+                    differenceInDays(toDate(task.dueDate), startOfToday()) <
+                        7 &&
+                    differenceInDays(toDate(task.dueDate), startOfToday()) >= 0 
             );
             break;
 
