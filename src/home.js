@@ -124,7 +124,8 @@ export function generateMainPanel() {
     mainPanel.id = "main_content";
 
     const text = document.createElement("h1");
-    text.textContent = "MainPanel title";
+    text.textContent = "Home";
+    text.id = "parent_list_name_main_panel";
     mainPanel.appendChild(text);
 
     // Main container to organize multiple task containers

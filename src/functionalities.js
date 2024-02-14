@@ -1,10 +1,19 @@
 /**
  * Collection of utilities as Constants, validations, functions and events
  */
-import { priorityValues, listArray, tasksArray, Task, TaskList } from "./model";
+import {
+    priorityValues,
+    listArray,
+    tasksArray,
+    Task,
+    TaskList,
+    tasksDateFilter,
+    tasksProjectFilter,
+} from "./model";
 import pencilIcon from "./assets/edit.svg";
 import trashIcon from "./assets/trash.svg";
 import { createSidePanelList, generateNewTaskPopup } from "./home";
+import { toDate, isToday, differenceInDays, startOfToday } from "date-fns";
 
 export const NO_DATE = new Date(864000000000000);
 
@@ -148,15 +157,44 @@ export function refreshTasksView() {
 
     const taskPanel = document.getElementById("task_panel");
 
+    let filteredTasksArray, arrayToPrint;
+
     //const mainSection = document.getElementById("main_content");
 
     // Clears the task panel
     taskPanel.innerHTML = "";
 
-    // Generates HTML elements from the actual tasks from the main array
-    tasksArray.forEach((task) => {
-        taskPanel.appendChild(generateNewTaskElement(task));
-    });
+    // Generates HTML elements from tasks in the tasksArray.
+    // This array can be filtered or not.
+
+    switch (tasksDateFilter) {
+        case "today":
+            filteredTasksArray = tasksArray.filter((task) =>
+                isToday(toDate(task.dueDate))
+            );
+            break;
+
+        case "upcoming":
+            filteredTasksArray = tasksArray.filter(
+                (task) =>
+                    differenceInDays(toDate(task.dueDate), startOfToday()) < 7
+            );
+            break;
+
+        default:
+            filteredTasksArray = tasksArray;
+            break;
+    }
+
+    if (tasksProjectFilter == "") {
+        filteredTasksArray.forEach((task) => {
+            taskPanel.appendChild(generateNewTaskElement(task));
+        });
+    } else {
+        filteredTasksArray.filter(
+            (task) => task.parentList == tasksProjectFilter
+        );
+    }
 }
 
 function createAndEditTaskObjectFromPopupForm() {

@@ -11,7 +11,7 @@ export class Task {
      * @param {string} taskName
      * @param {string} taskDescription
      * @param {Date} dueDate
-     * @param {TaskList} parentList
+     * @param {string} parentListID
      * @param {string} priority
      * @param {string} taskId
      */
@@ -126,9 +126,17 @@ export const priorityValues = Object.freeze({
     HIGH: 1,
 });
 
+// Used as global variable to filter the shown tasks by dueDate. 
+// "today", "upcoming" (up to 7 days), "anytime"
+export let tasksDateFilter = "anytime";
+
+// Used as global variable to filter the shown tasks by ParentList. 
+// "" default value. This value is replaced by the parentList ID to filter the tasks
+export let tasksProjectFilter = "";
+
 // Array to contain all created tasks
 export const tasksArray = [];
 
 // Array to contain all created taskLists.
 // Contains the list 'General' by default. This list will be linked to the Home (side-panel menu)
-export const listArray = [new TaskList("General"), new TaskList("Test")];
+export const listArray = [];
