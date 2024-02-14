@@ -288,6 +288,13 @@ nav {
         "tasks-grid";
 }
 
+.main-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
 .popup-task {
     position: absolute;
     left: 0;

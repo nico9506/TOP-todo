@@ -125,6 +125,7 @@ export function generateMainPanel() {
     mainPanel.id = "main_content";
 
     const titleContainer = document.createElement("div");
+    titleContainer.classList.add("main-title-container");
 
     const dueDateTitle = document.createElement("h1");
     dueDateTitle.textContent = "Home";
