@@ -73,45 +73,106 @@ export function addEvListeners() {
     anytime.addEventListener("click", anytimeTasksFilter);
 }
 
+export function tasksByProject() {
+    const listID = this.id.slice(5);
+
+    const projectTitle = document.getElementById("parent_list_name_main_panel");
+    projectTitle.textContent = "-";
+
+    listArray.forEach((list) => {
+        console.log("listID = " + listID);
+        console.log("(element in array) list.id = " + list.id);
+        console.log("(element in array) list.name = " + list.name);
+        if (list.id == listID) {
+            projectTitle.textContent = list.name;
+        }
+    });
+
+    console.log("(punto 0) tasksProjectFilter in taskByProject(): " + tasksProjectFilter);
+
+    tasksProjectFilter = listID;
+    console.log("(punto 1) tasksProjectFilter in taskByProject(): " + tasksProjectFilter);
+
+    refreshListView(); //cleans the sp-group-selected class
+
+    document.getElementById(this.id).classList.add("sp-group-selected");
+
+    refreshTasksView();
+
+    // console.log("task parent list: " + tasksArray[0].parentList + " - Type: " + typeof(tasksArray[0].parentList));
+    // console.log("filter: " + tasksProjectFilter + " - Type: " + typeof(tasksProjectFilter));
+    // const testtest = tasksArray[0].parentList == tasksProjectFilter;
+    // console.log("equal?: " + testtest);
+}
+
+function removeCSSClassFilterSelected() {
+    document.getElementById("sp_g_home").classList.remove("sp-group-selected");
+    document.getElementById("sp_g_today").classList.remove("sp-group-selected");
+    document
+        .getElementById("sp_g_upcoming")
+        .classList.remove("sp-group-selected");
+    document
+        .getElementById("sp_g_anytime")
+        .classList.remove("sp-group-selected");
+}
+
 function cleanTasksFilters() {
-    document.getElementById("parent_list_name_main_panel").textContent = "Home";
+    document.getElementById("filter_date_title_main_panel").textContent =
+        "Home";
 
     tasksDateFilter = "anytime";
 
     tasksProjectFilter = "";
 
+    removeCSSClassFilterSelected();
+
+    document.getElementById("sp_g_home").classList.add("sp-group-selected");
+
     refreshTasksView();
+    refreshListView();
 }
 
 function todaysTasksFilter() {
-    document.getElementById("parent_list_name_main_panel").textContent =
+    document.getElementById("filter_date_title_main_panel").textContent =
         "Today";
 
     tasksDateFilter = "today";
 
     // tasksProjectFilter = "";
 
+    removeCSSClassFilterSelected();
+
+    document.getElementById("sp_g_today").classList.add("sp-group-selected");
+
     refreshTasksView();
 }
 
 function upcomingTasksFilter() {
-    document.getElementById("parent_list_name_main_panel").textContent =
+    document.getElementById("filter_date_title_main_panel").textContent =
         "Upcoming";
 
     tasksDateFilter = "upcoming";
 
     // tasksProjectFilter = "";
 
+    removeCSSClassFilterSelected();
+
+    document.getElementById("sp_g_upcoming").classList.add("sp-group-selected");
+
     refreshTasksView();
 }
 
 function anytimeTasksFilter() {
-    document.getElementById("parent_list_name_main_panel").textContent =
+    document.getElementById("filter_date_title_main_panel").textContent =
         "Anytime";
 
     tasksDateFilter = "anytime";
 
     // tasksProjectFilter = "";
+
+    removeCSSClassFilterSelected();
+
+    document.getElementById("sp_g_anytime").classList.add("sp-group-selected");
 
     refreshTasksView();
 }
@@ -216,7 +277,8 @@ export function refreshTasksView() {
 
     const taskPanel = document.getElementById("task_panel");
 
-    let filteredTasksArray, arrayToPrint;
+    let filteredTasksArray;
+    const arrayToPrint = [];
 
     //const mainSection = document.getElementById("main_content");
 
@@ -238,7 +300,7 @@ export function refreshTasksView() {
                 (task) =>
                     differenceInDays(toDate(task.dueDate), startOfToday()) <
                         7 &&
-                    differenceInDays(toDate(task.dueDate), startOfToday()) >= 0 
+                    differenceInDays(toDate(task.dueDate), startOfToday()) >= 0
             );
             break;
 
@@ -247,14 +309,21 @@ export function refreshTasksView() {
             break;
     }
 
+
+    console.log("tasksProjectFilter in refreshtTaskView(): " + tasksProjectFilter);
+
     if (tasksProjectFilter == "") {
         filteredTasksArray.forEach((task) => {
             taskPanel.appendChild(generateNewTaskElement(task));
         });
     } else {
-        filteredTasksArray.filter(
-            (task) => task.parentList == tasksProjectFilter
-        );
+        filteredTasksArray.forEach(task => {
+            if (task.parentList == tasksProjectFilter) arrayToPrint.push(task);
+        });
+
+        arrayToPrint.forEach((item) => {
+            taskPanel.appendChild(generateNewTaskElement(item));
+        });
     }
 }
 
@@ -464,6 +533,9 @@ function searchTaskAndTogglePopup() {
         }
 
         toggleNewTaskPopup();
+
+        // the variable value is replaced in toggleNewTaskPopup()
+        lastID = this.getAttribute("editID");
 
         taskNameForm.value = element.name;
         taskDescForm.value = element.desc;

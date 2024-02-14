@@ -175,6 +175,12 @@ nav {
     border-radius: 10px;
 }
 
+.sp-group-selected {
+    background-color: var(--ct-darker);
+    border: 0px solid var(--ct-darker);
+    border-radius: 10px;
+}
+
 .sp-group > .sp-g-icon {
     width: var(--subheader-fs);
     filter: var(--filter-light);

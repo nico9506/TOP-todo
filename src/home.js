@@ -16,6 +16,7 @@ import {
     generateOptionFromList,
     searchAndDeleteList,
     searchListAndTogglePopup,
+    tasksByProject,
 } from "./functionalities";
 import { listArray, priorityValues } from "./model";
 
@@ -123,10 +124,19 @@ export function generateMainPanel() {
     mainPanel.classList.add("main-content");
     mainPanel.id = "main_content";
 
-    const text = document.createElement("h1");
-    text.textContent = "Home";
-    text.id = "parent_list_name_main_panel";
-    mainPanel.appendChild(text);
+    const titleContainer = document.createElement("div");
+
+    const dueDateTitle = document.createElement("h1");
+    dueDateTitle.textContent = "Home";
+    dueDateTitle.id = "filter_date_title_main_panel";
+    titleContainer.appendChild(dueDateTitle);
+
+    const parentListTitle = document.createElement("h3");
+    parentListTitle.textContent = "All projects";
+    parentListTitle.id = "parent_list_name_main_panel";
+    titleContainer.appendChild(parentListTitle);
+
+    mainPanel.appendChild(titleContainer);
 
     // Main container to organize multiple task containers
     const taskSection = document.createElement("div");
@@ -290,14 +300,15 @@ export function createSidePanelGroup(groupName, icon_path) {
 
 export function createSidePanelList(listObject) {
     /**
-     * Creates and returns the HTML element to use place in the side panel menu
+     * Creates and returns the HTML element to place in the side panel menu
      */
     const container = document.createElement("div");
     container.classList.add("list-box");
 
     const group = document.createElement("div");
-    group.id = "sp_g_" + listObject.name;
+    group.id = "sp_g_" + listObject.id;
     group.classList.add("sp-group");
+    group.addEventListener("click", tasksByProject);
 
     const icon = new Image();
     icon.src = anytimeIcon;
