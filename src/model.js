@@ -139,4 +139,4 @@ export const tasksArray = [];
 
 // Array to contain all created taskLists.
 // Contains the list 'General' by default. This list will be linked to the Home (side-panel menu)
-export const listArray = [];
+export const listArray = [new TaskList("My project")];

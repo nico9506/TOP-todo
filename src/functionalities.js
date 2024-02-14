@@ -88,10 +88,14 @@ export function tasksByProject() {
         }
     });
 
-    console.log("(punto 0) tasksProjectFilter in taskByProject(): " + tasksProjectFilter);
+    console.log(
+        "(punto 0) tasksProjectFilter in taskByProject(): " + tasksProjectFilter
+    );
 
     tasksProjectFilter = listID;
-    console.log("(punto 1) tasksProjectFilter in taskByProject(): " + tasksProjectFilter);
+    console.log(
+        "(punto 1) tasksProjectFilter in taskByProject(): " + tasksProjectFilter
+    );
 
     refreshListView(); //cleans the sp-group-selected class
 
@@ -119,6 +123,9 @@ function removeCSSClassFilterSelected() {
 function cleanTasksFilters() {
     document.getElementById("filter_date_title_main_panel").textContent =
         "Home";
+
+    document.getElementById("parent_list_name_main_panel").textContent =
+        "All projects";
 
     tasksDateFilter = "anytime";
 
@@ -309,15 +316,16 @@ export function refreshTasksView() {
             break;
     }
 
-
-    console.log("tasksProjectFilter in refreshtTaskView(): " + tasksProjectFilter);
+    console.log(
+        "tasksProjectFilter in refreshtTaskView(): " + tasksProjectFilter
+    );
 
     if (tasksProjectFilter == "") {
         filteredTasksArray.forEach((task) => {
             taskPanel.appendChild(generateNewTaskElement(task));
         });
     } else {
-        filteredTasksArray.forEach(task => {
+        filteredTasksArray.forEach((task) => {
             if (task.parentList == tasksProjectFilter) arrayToPrint.push(task);
         });
 
