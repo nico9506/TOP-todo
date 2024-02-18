@@ -85,6 +85,21 @@ export class Task {
     get id() {
         return this.#_taskId;
     }
+
+    /**
+     * When calling JavaScript's built-in JSON.stringify() function on an object, it looks for a toJSON() function on that object and, if such a function exists, stringifies the result of that function's return value.
+     */
+
+    toJSON() {
+        return {
+            taskName: this.#_taskName,
+            description: this.#_taskDescription,
+            dueDate: this.#_dueDate,
+            parentListId: this.#_parentList,
+            priority: this.#_priority,
+            taskId: this.#_taskId,
+        };
+    }
 }
 
 export class TaskList {
@@ -126,11 +141,11 @@ export const priorityValues = Object.freeze({
     HIGH: 1,
 });
 
-// Used as global variable to filter the shown tasks by dueDate. 
+// Used as global variable to filter the shown tasks by dueDate.
 // "today", "upcoming" (up to 7 days), "anytime"
 export let tasksDateFilter = "anytime";
 
-// Used as global variable to filter the shown tasks by ParentList. 
+// Used as global variable to filter the shown tasks by ParentList.
 // "" default value. This value is replaced by the parentList ID to filter the tasks
 export let tasksProjectFilter = "";
 

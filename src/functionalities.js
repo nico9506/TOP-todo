@@ -80,33 +80,18 @@ export function tasksByProject() {
     projectTitle.textContent = "-";
 
     listArray.forEach((list) => {
-        console.log("listID = " + listID);
-        console.log("(element in array) list.id = " + list.id);
-        console.log("(element in array) list.name = " + list.name);
         if (list.id == listID) {
             projectTitle.textContent = list.name;
         }
     });
 
-    console.log(
-        "(punto 0) tasksProjectFilter in taskByProject(): " + tasksProjectFilter
-    );
-
     tasksProjectFilter = listID;
-    console.log(
-        "(punto 1) tasksProjectFilter in taskByProject(): " + tasksProjectFilter
-    );
 
     refreshListView(); //cleans the sp-group-selected class
 
     document.getElementById(this.id).classList.add("sp-group-selected");
 
     refreshTasksView();
-
-    // console.log("task parent list: " + tasksArray[0].parentList + " - Type: " + typeof(tasksArray[0].parentList));
-    // console.log("filter: " + tasksProjectFilter + " - Type: " + typeof(tasksProjectFilter));
-    // const testtest = tasksArray[0].parentList == tasksProjectFilter;
-    // console.log("equal?: " + testtest);
 }
 
 function removeCSSClassFilterSelected() {
@@ -210,6 +195,8 @@ function toggleNewTaskPopup() {
 
     // Clean the variable in case the popup has been opened from the edit button
     lastID = "";
+
+
 }
 
 function toggleSidePanel() {
@@ -218,6 +205,8 @@ function toggleSidePanel() {
 
     //CSS Class "side-panel-hidden": change display to 'none'
     document.getElementById("sidePanel").classList.toggle("side-panel-hidden");
+
+    console.log(JSON.stringify(tasksArray));
 }
 
 function toggleNewListForm() {
@@ -316,10 +305,6 @@ export function refreshTasksView() {
             break;
     }
 
-    console.log(
-        "tasksProjectFilter in refreshtTaskView(): " + tasksProjectFilter
-    );
-
     if (tasksProjectFilter == "") {
         filteredTasksArray.forEach((task) => {
             taskPanel.appendChild(generateNewTaskElement(task));
@@ -410,8 +395,6 @@ function generateNewTaskElement(taskObject) {
 
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
-
-    console.log("taskObject.priority: " + taskObject.priority);
 
     switch (parseInt(taskObject.priority)) {
         case -1:
@@ -551,9 +534,7 @@ function searchTaskAndTogglePopup() {
         taskPriorityForm.value = element.priority;
         taskParentList.value = parentListName;
 
-        console.log("element.parentList: " + element.parentList);
-
-        console.log("Popup refilled with: " + lastID);
+        console.log("Popup filled up with: " + lastID);
     }
 }
 
@@ -646,8 +627,6 @@ export function searchListAndTogglePopup() {
         }
     }
 
-    console.log(index);
-
     if (index > -1) {
         const element = listArray[index];
 
@@ -664,7 +643,7 @@ export function searchListAndTogglePopup() {
 
         listNameForm.value = element.name;
 
-        console.log("Popup refilled with: " + lastID);
+        console.log("Popup filled up with: " + lastID);
     }
 }
 
