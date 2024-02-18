@@ -205,8 +205,6 @@ function toggleSidePanel() {
 
     //CSS Class "side-panel-hidden": change display to 'none'
     document.getElementById("sidePanel").classList.toggle("side-panel-hidden");
-
-    console.log(JSON.stringify(tasksArray));
 }
 
 function toggleNewListForm() {
@@ -318,6 +316,13 @@ export function refreshTasksView() {
             taskPanel.appendChild(generateNewTaskElement(item));
         });
     }
+
+    /**
+     * Web Storage 
+     * Reference: https://adamcoster.com/blog/how-to-stringify-class-instances-in-javascript-and-express-js
+     * Consulted: Feb 18, 2024
+     */
+    console.log(JSON.stringify(tasksArray));
 }
 
 function createAndEditTaskObjectFromPopupForm() {
