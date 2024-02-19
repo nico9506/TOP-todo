@@ -195,8 +195,6 @@ function toggleNewTaskPopup() {
 
     // Clean the variable in case the popup has been opened from the edit button
     lastID = "";
-
-
 }
 
 function toggleSidePanel() {
@@ -318,22 +316,61 @@ export function refreshTasksView() {
     }
 
     /**
-     * Web Storage 
-     * 
+     * Web Storage
+     * Saves the tasksArray and listArray in JSON format within the
+     * items "tasks" and "projects" respectively
+     *
      * References:
-     * 
+     *
      * https://adamcoster.com/blog/how-to-stringify-class-instances-in-javascript-and-express-js
-     * 
+     *
      * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
-     * 
+     *
      * Consulted: Feb 18, 2024
      */
     localStorage.setItem("tasks", JSON.stringify(tasksArray));
     // console.log(JSON.stringify(tasksArray));
-    console.log(JSON.parse(localStorage.getItem("tasks")));
 
     localStorage.setItem("projects", JSON.stringify(listArray));
     // console.log(JSON.stringify(listArray));
+}
+
+export function loadProjectsFromLocalStorage() {
+    /**
+     * Get the items "tasks" and "projects" from the local storage
+     * Converts them into readable js objects
+     * Creates the tasks and lists from this data before pop in the arrays
+     */
+    let listTemp;
+
+    const listArrayObject = JSON.parse(localStorage.getItem("projects"));
+
+    listArrayObject.forEach((list) => {
+        listTemp = new TaskList(list.listName);
+        listTemp.id = list.listID;
+        listArray.push(listTemp);
+    });
+}
+
+export function loadTasksFromLocalStorage() {
+    /**
+     * Get the items "tasks" and "projects" from the local storage
+     * Converts them into readable js objects
+     * Creates the tasks and lists from this data before pop in the arrays
+     */
+    const tasksArrayObject = JSON.parse(localStorage.getItem("tasks"));
+
+    tasksArrayObject.forEach((task) => {
+        tasksArray.push(
+            new Task(
+                task.taskName,
+                task.description,
+                task.dueDate,
+                task.parentListID,
+                task.priority
+            )
+        );
+    });
 }
 
 function createAndEditTaskObjectFromPopupForm() {

@@ -13,13 +13,25 @@ import "./style.css";
 
     body.appendChild(AppInterface.generateSidePanel());
 
+    try {
+        AppFunctionalities.loadProjectsFromLocalStorage();
+    } catch (error) {
+        console.log("No PROJECTS in local storage found.");
+    }
+    
     AppFunctionalities.refreshListView();
-
+    
     body.appendChild(AppInterface.generateMainPanel());
 
     body.appendChild(AppInterface.generateFooter());
 
     body.appendChild(AppInterface.generateNewTaskPopup());
+
+    try {
+        AppFunctionalities.loadTasksFromLocalStorage();
+    } catch (error) {
+        console.log("No TASKS in local storage found.");
+    }
 
     AppFunctionalities.refreshTasksView();
 })();
