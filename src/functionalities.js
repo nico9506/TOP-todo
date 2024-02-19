@@ -323,6 +323,8 @@ export function refreshTasksView() {
      * Consulted: Feb 18, 2024
      */
     console.log(JSON.stringify(tasksArray));
+
+    console.log(JSON.stringify(listArray));
 }
 
 function createAndEditTaskObjectFromPopupForm() {

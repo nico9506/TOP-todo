@@ -132,6 +132,19 @@ export class TaskList {
     get id() {
         return this.#_listId;
     }
+
+    // Required to change the list ID when the app is loaded from web storage
+    // Otherwise, the listID and tasks parentList values would not match.
+    set id(newId) {
+        this.#_listId = newId;
+    }
+
+    toJSON() {
+        return {
+            listName: this.#_listName,
+            listID: this.#_listId,
+        };
+    }
 }
 
 // Task priority values
