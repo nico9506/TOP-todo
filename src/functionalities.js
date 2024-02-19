@@ -366,7 +366,7 @@ export function loadTasksFromLocalStorage() {
                 task.taskName,
                 task.description,
                 task.dueDate,
-                task.parentListID,
+                task.parentListId,
                 task.priority
             )
         );
