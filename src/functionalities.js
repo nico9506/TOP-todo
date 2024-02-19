@@ -319,12 +319,21 @@ export function refreshTasksView() {
 
     /**
      * Web Storage 
-     * Reference: https://adamcoster.com/blog/how-to-stringify-class-instances-in-javascript-and-express-js
+     * 
+     * References:
+     * 
+     * https://adamcoster.com/blog/how-to-stringify-class-instances-in-javascript-and-express-js
+     * 
+     * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+     * 
      * Consulted: Feb 18, 2024
      */
-    console.log(JSON.stringify(tasksArray));
+    localStorage.setItem("tasks", JSON.stringify(tasksArray));
+    // console.log(JSON.stringify(tasksArray));
+    console.log(JSON.parse(localStorage.getItem("tasks")));
 
-    console.log(JSON.stringify(listArray));
+    localStorage.setItem("projects", JSON.stringify(listArray));
+    // console.log(JSON.stringify(listArray));
 }
 
 function createAndEditTaskObjectFromPopupForm() {
